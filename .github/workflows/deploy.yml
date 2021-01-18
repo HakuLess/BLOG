@@ -29,7 +29,7 @@ jobs:
       - uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
+          BRANCH: master
           FOLDER: docs/.vuepress/dist/
-#           CLEAN: true # Automatically remove deleted files from the deploy branch
-#           REPOSITORY_NAME: HakuLess/HakuLess.github.io
+          CLEAN: true # Automatically remove deleted files from the deploy branch
+          REPOSITORY_NAME: HakuLess/HakuLess.github.io
