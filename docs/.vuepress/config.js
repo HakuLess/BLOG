@@ -38,18 +38,42 @@ module.exports = {
                 {
                     title: '周赛',
                     collapsable: true,
-                }, 
+                    children: [
+                        { title: '第 225 场周赛', path: '/Contest/LeetCode/WC225.md' },
+                    ]
+                },
                 {
                     title: '双周赛',
                     collapsable: true,
                     children: [
-                        { title: 'BiWeekly 43', path:'/Contest/LeetCode/WC222.md'},
+                        { title: 'BiWeekly 43', path: '/Contest/LeetCode/WC222.md' },
                     ]
                 }
             ]
         },
     },
     markdown: {
-        lineNumbers: true
-    }
+        lineNumbers: true,
+        extendMarkdown: md => {
+            md.use(require('@iktakahiro/markdown-it-katex'));
+        },
+    },
+    head: [
+        [
+            'link',
+            {
+                rel: 'stylesheet',
+                href:
+                    'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css',
+            },
+        ],
+        [
+            'link',
+            {
+                rel: 'stylesheet',
+                href:
+                    'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css',
+            },
+        ],
+    ],
 }

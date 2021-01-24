@@ -6,10 +6,14 @@
   "author": "HaKu",
   "license": "MIT",
   "devDependencies": {
+    "@iktakahiro/markdown-it-katex": "^4.0.0",
     "vuepress": "^1.7.1"
   },
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
+  },
+  "dependencies": {
+    "@iktakahiro/markdown-it-katex": "^4.0.0"
   }
 }
