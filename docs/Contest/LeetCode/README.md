@@ -10,6 +10,8 @@
 
 [第 225 场周赛](../LeetCode/WC225.md)
 
+[第 224 场周赛](../LeetCode/WC224.md)
+
 ### LeetCode双周赛题解
 
 [第 45 场双周赛](../LeetCode/BWC45.md)
