@@ -16,6 +16,8 @@
 
 ### LeetCode双周赛题解
 
+[第 46 场双周赛](../LeetCode/BWC46.md)
+
 [第 45 场双周赛](../LeetCode/BWC45.md)
 
 [第 44 场双周赛](../LeetCode/BWC44.md)
