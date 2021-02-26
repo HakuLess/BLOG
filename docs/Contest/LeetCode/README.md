@@ -2,7 +2,7 @@
 
 ### LeetCode周赛题解
 
-[第 229 场周赛](../LeetCode/WC228.md)
+[第 229 场周赛](../LeetCode/WC229.md)
 
 [第 228 场周赛](../LeetCode/WC228.md)
 
@@ -13,6 +13,8 @@
 [第 225 场周赛](../LeetCode/WC225.md)
 
 [第 224 场周赛](../LeetCode/WC224.md)
+
+[第 223 场周赛](../LeetCode/WC223.md)
 
 ### LeetCode双周赛题解
 
