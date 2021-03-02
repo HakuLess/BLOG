@@ -16,123 +16,130 @@ class Solution1716 {
 }
 ```
 
-## Q2 [1733. 需要教语言的最少人数](https://leetcode-cn.com/problems/minimum-number-of-people-to-teach/)
+## Q2 [1717. 删除子字符串的最大得分](https://leetcode-cn.com/problems/maximum-score-from-removing-substrings/)
 
-需要注意条件，只可以选择一门语言来教。首先过滤出已经可以交流的好友，他们已经可以不用管了。对于剩下的不可交流的好友，直接看他们会的最多的语言是哪门，那么教这么语言的人就可以最少。
+首先贪心删除价值大的字符串，然后再删除小的。
 
-```kotlin
-class Solution1733 {
-    fun minimumTeachings(n: Int, languages: Array<IntArray>, friendships: Array<IntArray>): Int {
-        val study = hashSetOf<Int>()
-        friendships.forEach { (a, b) ->
-            if (languages[a - 1].all { it !in languages[b - 1] }) {
-                study.add(a - 1)
-                study.add(b - 1)
-            }
-        }
-        val arr = IntArray(500)
-        study.forEach {
-            languages[it].forEach {
-                arr[it]++
-            }
-        }
-        return study.size - arr.max()!!
-    }
-}
-```
-
-## Q3 [1734. 解码异或后的排列](https://leetcode-cn.com/problems/decode-xored-permutation/)
-
-脑筋急转弯类型的题目。首先注意条件，n是个**奇数**。举例说明，以5为例，我们给出的数组是
-$$
-\left[ a0 \oplus a1, a1 \oplus a2, a2 \oplus a3, a3 \oplus a4\right]
-$$
-同时，我们知道a0~a5是1到5的组合，因此我们可以知道所有值进行异或后的值，记为result。那么我们把 a1 xor a2的值 和 a3 xor a4的值从result中异或掉，我们就可以得到a0的值，之后直接遍历数组就可以推出原数组了。
+证明：对于非'a'、'b'的字符，会将原字符串分割成多个子字符串，且该字符串仅包含'a'、'b'。对于每个子字符串无论用什么顺序删除"ab" or "ba"，最终剩余的部分一定是相同的。因此先删除价值大的一定会使总体的价值变大。
 
 ```kotlin
-class Solution1734 {
-    fun decode(encoded: IntArray): IntArray {
-        val n = encoded.size + 1
-        val ans = IntArray(n)
-        ans[0] = 1
-        for (i in 2..n) {
-            ans[0] = ans[0] xor i
+class Solution1717 {
+    fun maximumGain(s: String, x: Int, y: Int): Int {
+        var ans = 0
+        fun dfs(s: String, a: Char, b: Char, v: Int): String {
+            val st = Stack<Char>()
+            s.forEach {
+                if (it == a && st.isNotEmpty() && st.peek() == b) {
+                    st.pop()
+                    ans += v
+                } else {
+                    st.add(it)
+                }
+            }
+            return st.joinToString("")
         }
-        for (i in 1 until encoded.size step 2) {
-            ans[0] = ans[0] xor encoded[i]
-        }
-        for (i in encoded.indices) {
-            ans[i + 1] = encoded[i] xor ans[i]
-        }
+        val (a, b) = if (x >= y) Pair('a', 'b') else Pair('b', 'a')
+        val (big, small) = if (x >= y) Pair(x, y) else Pair(y, x)
+        val next = dfs(s, b, a, big)
+        dfs(next, a, b, small)
         return ans
     }
 }
 ```
 
-## Q4 [1735. 生成乘积数组的方案数](https://leetcode-cn.com/problems/count-ways-to-make-array-with-product/)
+## Q3 [1718. 构建字典序最大的可行序列](https://leetcode-cn.com/problems/construct-the-lexicographically-largest-valid-sequence/)
 
-数学题目，之前见到过一次类似的，但是比赛时没搞出来。n个数的乘积为k，能够想到需要先将k因式分解。分解成t个质数的乘积，然后将这t个质数分配到n个位置上，由于质数可能是重复的，因此需要使用**重复组合**的公式。
-$$
-H_{n}^r=C_{n+r-1}^r=\frac{(n+r-1)!}{r!(n-1)!}
-$$
-即，从n个不同元素中，取出r个可重复的元素，有多少种组合。
+标准的回溯算法，不过代码写起来还挺麻烦...
 
-以(4，12)为例，12可以因式分解为 2 * 2 * 3。一共有4个格子需要填充。对于3的组合，一共有4种，分别可以放在0、1、2、3的格子上，而两个2可以按照刚才的公式(4+2-1)!/2!/3! = 5 * 4 * 3 * 2 / 2 / 3 / 2 = 10，则总组合数为4 * 10。具体示例如下：
-
-**质数3的4种组合**
-
-![image-20210131011411755](https://i.loli.net/2021/01/31/nPuKxJmU3G5FCkz.png)
-
-**质数2的10种组合**
-
-![image-20210131011636230](https://i.loli.net/2021/01/31/tKL8PbjHQXzZF39.png)
-
-如图所示，3的4种分配与2的10种分配互相独立（乘积不会出现重复结果），因此总分配数可以直接用4*10=40来计算。
-
-下面就可以直接将k的质因数分解出其每个质数所包含的个数即可。同时，由于k的总大小小于10000，我们可以直接枚举出100以内的质数即可。因为大于100的质数至多只能有1个，如果有两个则乘积会大于10000，而将小于100的质数都除完后的k，不为1，则可以认定这个k是个大于100的质数，直接乘以n分配即可（C(n, 1)）。
+对于1和非1要分两种情况处理，并且使用逆序贪心递归，找到第一个符合要求的即可return掉。
 
 ```kotlin
-class Solution5648 {
-    fun waysToFillArray(queries: Array<IntArray>): IntArray {
-        val mod = 1000000007L
-        val primes = intArrayOf(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97)
-        val ans = arrayListOf<Int>()
-        queries.forEach {
-            var (n, k) = it
-            var res = 1L
-            for (p in primes) {
-                var c = 0L
-                if (p > k) break
-                while (k % p == 0) {
-                    c++
-                    k /= p
-                }
-                res *= longComb(c + n - 1, c)
-                res %= mod
+class Solution1718 {
+    fun constructDistancedSequence(n: Int): IntArray {
+        val res = IntArray(n * 2 - 1)
+        val visited = BooleanArray(n + 1)
+        fun dfs(pos: Int): Boolean {
+            if (pos >= n * 2 - 1) {
+                return true
+            } else if (res[pos] > 0) {
+                return dfs(pos + 1)
             }
-            if (k > 1)
-                res = res * n % mod
-            ans.add(res.toInt())
+            for (num in n downTo 1) {
+                if (!visited[num]) {
+                    if (num == 1) {
+                        res[pos] = 1
+                        visited[1] = true
+                        if (dfs(pos + 1)) {
+                            return true
+                        }
+                        visited[1] = false
+                        res[pos] = 0
+                    } else {
+                        if (pos + num in res.indices && res[pos + num] == 0) {
+                            res[pos] = num
+                            res[pos + num] = num
+                            visited[num] = true
+                            if (dfs(pos + 1)) {
+                                return true
+                            }
+                            visited[num] = false
+                            res[pos] = 0
+                            res[pos + num] = 0
+                        }
+                    }
+                }
+            }
+            return false
         }
-        return ans.toIntArray()
+        dfs(0)
+        return res
     }
 }
+```
 
-fun comb(m: BigInteger, n: BigInteger): BigInteger {
-    var a = BigInteger.ONE
-    var b = BigInteger.ONE
-    var result = BigInteger.ONE
-    val qc = minOf(n, m - n)
-    for (j in 0 until qc.toInt()) {
-        a = a.multiply(m - BigInteger.valueOf(j.toLong()))
-        b = b.multiply(qc - BigInteger.valueOf(j.toLong()))
+## Q4 [1719. 重构一棵树的方案数](https://leetcode-cn.com/problems/number-of-ways-to-reconstruct-a-tree/)
+
+该题已经降低了一些难度，给出的结果只需要$0、1、2$，而不需要具体的方案数。
+
+通过给出的祖先关系，可以判定每个节点与其他节点的关系数。使用关系数逆序排序，然后顺序遍历构建树结构，只要没有冲突，那么结果为$1$ or $2$，否则为$0$。冲突指的是，子孙节点包含的关系节点并不在祖先节点的包含关系中。
+
+若对于子节点与父节点拥有相同的关系数，那么代表这两个节点可以任意更换位置，则结果为$2$。
+
+```kotlin
+class Solution1719 {
+    fun checkWays(pairs: Array<IntArray>): Int {
+        val map = hashMapOf<Int, HashSet<Int>>()
+        val matrix = Array<BooleanArray>(501) { BooleanArray(501) { false } }
+        pairs.forEach {
+            map[it[0]] = map.getOrDefault(it[0], HashSet())
+            map[it[0]]!!.add(it[1])
+            map[it[1]] = map.getOrDefault(it[1], HashSet())
+            map[it[1]]!!.add(it[0])
+            matrix[it[0]][it[1]] = true
+            matrix[it[1]][it[0]] = true
+        }
+        val nodes = arrayListOf<Int>()
+        nodes.addAll(map.keys)
+        nodes.sortByDescending { map[it]!!.size }
+
+        val n = map.keys.size
+        if (map[nodes[0]]!!.size != n - 1) return 0
+        var ans = 1
+        for (i in 0 until n) {
+            val k = map[nodes[i]]!!.size
+            for (node in map[nodes[i]]!!) {
+                if (map[node]!!.size == k) {
+                    ans = 2
+                }
+                map[node]!!.remove(nodes[i])
+                for (it in map[node]!!) {
+                    if (!matrix[it][nodes[i]])
+                        return 0
+                }
+            }
+        }
+        return ans
     }
-    result = a / b
-    return result
-}
-
-fun longComb(m: Long, n: Long): Long {
-    return comb(m.toBigInteger(), n.toBigInteger()).mod(BigInteger.valueOf(1000000007L)).toLong()
 }
 ```
 
