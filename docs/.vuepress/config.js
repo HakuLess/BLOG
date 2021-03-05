@@ -48,6 +48,7 @@ module.exports = {
                         { title: '第 224 场周赛', path: '/Contest/LeetCode/WC224.md' },
                         { title: '第 223 场周赛', path: '/Contest/LeetCode/WC223.md' },
                         { title: '第 222 场周赛', path: '/Contest/LeetCode/WC222.md' },
+                        { title: '第 221 场周赛', path: '/Contest/LeetCode/WC221.md' },
                     ]
                 },
                 {
