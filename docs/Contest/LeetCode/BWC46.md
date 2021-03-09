@@ -85,7 +85,7 @@ class Solution5671 {
 }
 ```
 
-## Q4 [Solution5670. 互质树](https://leetcode-cn.com/problems/tree-of-coprimes/)
+## Q4 [5670. 互质树](https://leetcode-cn.com/problems/tree-of-coprimes/)
 
 非常恶心的题目，通过这道题就可以看出LeetCode的出题风格。题意本身很清晰，可以用DFS向下传递所有的祖先节点，然后每个儿子更新这个祖先列表 && 同时计算出离自己的互质祖先是几。这种方式需要遍历所有的祖先，树的高度越大，则复杂度越高，最终可以到达$O(n^2)$，而$n$的取值范围是$[1..10^5]$，因此使用这种方式会超时。
 
