@@ -37,3 +37,5 @@
 [第 44 场双周赛](../LeetCode/BWC44.md)
 
 [第 43 场双周赛](../LeetCode/BWC43.md)
+
+[第 42 场双周赛](../LeetCode/BWC42.md)
