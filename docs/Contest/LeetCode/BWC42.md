@@ -77,6 +77,8 @@ class Solution1702 {
 
 而对于偶数个$1$，则是无论以那个为中心不动，结果都是相同的。如$11001001$，最终结果可以为$11110000$也可以为$00111100$，它们的$cost$都是$6$。都是左侧若$+1$则右侧的都$-1$，总体的$cost$是稳定的。
 
+[国际服图解题解](https://leetcode.com/problems/minimum-adjacent-swaps-for-k-consecutive-ones/discuss/987607/O(n)-explanation-with-picture)
+
 时间复杂度：$O(n)$
 
 ```kotlin
@@ -91,8 +93,12 @@ class Solution5624 {
             }
             if (l.size < k) {
                 l.add(i)
-                val mid = l[(l.size - 1) / 2]
-                cur += (i - mid) - (l.size / 2)
+                if (l.size == k) {
+                    val mid = l[(k - 1) / 2]
+                    l.forEachIndexed { index, it ->
+                        cur += abs(it - mid) - abs(k / 2 - index)
+                    }
+                }
             } else {
                 ans = minOf(ans, cur)
                 var mid = l[l.size / 2]
