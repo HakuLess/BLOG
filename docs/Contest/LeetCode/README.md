@@ -2,6 +2,10 @@
 
 ### LeetCode周赛题解
 
+[第 234 场周赛](../LeetCode/WC234.md)
+
+[第 233 场周赛](../LeetCode/WC233.md)
+
 [第 232 场周赛](../LeetCode/WC232.md)
 
 [第 231 场周赛](../LeetCode/WC231.md)
@@ -27,6 +31,8 @@
 [第 221 场周赛](../LeetCode/WC221.md)
 
 ### LeetCode双周赛题解
+
+[第 47 场双周赛](../LeetCode/BWC48.md)
 
 [第 47 场双周赛](../LeetCode/BWC47.md)
 
