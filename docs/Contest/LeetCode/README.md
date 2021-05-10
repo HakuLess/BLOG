@@ -1,6 +1,9 @@
 ## LeetCode题解导航
 
 ### LeetCode周赛题解
+
+[第 239 场周赛](../LeetCode/WC239.md)
+
 [第 236 场周赛](../LeetCode/WC236.md)
 
 [第 235 场周赛](../LeetCode/WC235.md)
