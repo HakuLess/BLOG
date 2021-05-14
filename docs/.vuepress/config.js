@@ -41,6 +41,7 @@ module.exports = {
                     children: [
                         { title: '第 240 场周赛', path: '/Contest/LeetCode/WC240.md' },
                         { title: '第 239 场周赛', path: '/Contest/LeetCode/WC239.md' },
+                        { title: '第 238 场周赛', path: '/Contest/LeetCode/WC238.md' },
                         { title: '第 236 场周赛', path: '/Contest/LeetCode/WC236.md' },
                         { title: '第 235 场周赛', path: '/Contest/LeetCode/WC235.md' },
                         { title: '第 234 场周赛', path: '/Contest/LeetCode/WC234.md' },
