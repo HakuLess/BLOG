@@ -2,9 +2,13 @@
 
 ### LeetCode周赛题解
 
+[第 241 场周赛](../LeetCode/WC240.md)
+
 [第 240 场周赛](../LeetCode/WC240.md)
 
 [第 239 场周赛](../LeetCode/WC239.md)
+
+[第 238 场周赛](../LeetCode/WC238.md)
 
 [第 236 场周赛](../LeetCode/WC236.md)
 
