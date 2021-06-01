@@ -123,3 +123,193 @@ class Solution5756 {
     }
 }
 ```
+
+还看到大神们有其他的两种解法，学习一下。
+
+### 二分图KM完美匹配
+
+[OIWiki 二分图最大权匹配](https://oi-wiki.org/graph/graph-matching/bigraph-weight-match/)
+
+[GeeksForGeeks Maximum Bipartite Matching](https://www.geeksforgeeks.org/maximum-bipartite-matching/)
+
+首先学习几个定义：
+
+1. 二分图：图中所有边的顶点可以分为两组，两组内无组内的边
+2. 完美匹配：每一个顶点只有一条边并相连到另一组顶点中
+
+这个算法可以将矩阵任务一对一的完美分配，如$N$个人完成$N$个任务，但每个人完成人的的耗时或效果不同等，可以求任意要求的最大最小值。
+
+利用该算法，将图中边的权重设置为异或值的取负数，即可算得最小值。
+
+```Kotlin
+class Solution5756 {
+    // 二分图 最大权匹配
+    fun minimumXORSum(nums1: IntArray, nums2: IntArray): Int {
+        val n = nums1.size
+        val graph = Graph(2 * n)
+        for (i in 0 until n) {
+            for (j in 0 until n) {
+                // Init Graph with weight
+                graph.addEdge(i, n + j, -(nums1[i] xor nums2[j]))
+            }
+        }
+        return -graph.km()
+    }
+}
+
+class Graph(val n: Int) {
+
+    // 图中边（可以有方向）
+    var adj: Array<LinkedList<Int>> = Array(n) { LinkedList<Int>() }
+
+    // 图中边的权重（可以有方向）
+    val weight = HashMap<Int, HashMap<Int, Int>>()
+
+    init {
+        for (i in 0 until n) {
+            weight[i] = hashMapOf()
+        }
+    }
+
+    fun addEdgeOri(i: Int, j: Int, w: Int = 0) {
+        adj[i].add(j)
+        weight[i]!![j] = w
+    }
+
+    fun addEdge(i: Int, j: Int, w: Int = 0) {
+        // Add w to v's list.
+        adj[i].add(j)
+        // Add v to w's list
+        adj[j].add(i)
+        weight[i]!![j] = w
+        weight[j]!![i] = w
+    }
+}
+
+/**
+ * 参考资料
+ * http://elmagnifico.tech/2018/01/24/BipartiteGraph-Max-Weight/
+ * https://www.cnblogs.com/fzl194/p/8834847.html
+ *
+ * 二分图带权最大匹配
+ * */
+fun Graph.km(): Int {
+    // n为总点数，m为两个分组的点的数量
+    val m = n / 2
+
+    val match = IntArray(m) { -1 }
+    val lval = IntArray(m)
+    val rval = IntArray(m)
+
+    for (i in 0 until m) {
+        // 使用右侧第一个点初始化左侧集合值）
+        lval[i] = weight[i]!![m]!!
+        for (j in m + 1 until n) {
+            // 最大化可行顶标
+            lval[i] = maxOf(lval[i], weight[i]!![j]!!)
+        }
+    }
+
+    // 左右点集合访问状态
+    val ls = BooleanArray(m)
+    val rs = BooleanArray(m)
+
+    fun dfs(u: Int): Boolean {
+        ls[u] = true
+        for (v in 0 until m) {
+            if (!rs[v] && lval[u] + rval[v] == weight[u]!![v + m]) {
+                rs[v] = true
+                if (match[v] == -1 || dfs(match[v])) {
+                    match[v] = u
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    // 遍历左顶点，寻找最大匹配
+    for (u in 0 until m) {
+        while (true) {
+            // 清空之前的状态
+            ls.fill(false)
+            rs.fill(false)
+
+            if (dfs(u)) break
+            var d = Int.MAX_VALUE
+            for (i in 0 until m)
+                if (ls[i])
+                    for (j in 0 until m)
+                        if (!rs[j])
+                            d = minOf(d, lval[i] + rval[j] - weight[i]!![m + j]!!)
+
+            // 更新顶点权值，直到完美匹配
+            for (i in 0 until m) {
+                if (ls[i])
+                    lval[i] -= d
+                if (rs[i])
+                    rval[i] += d
+            }
+        }
+    }
+
+    var res = 0
+    for (i in 0 until m) {
+        res += weight[match[i]]!![i + m]!!
+    }
+    return res
+}
+```
+
+### 玄学退火算法(Simulated Annealing)
+
+还有一种利用随机算法模拟最优解的玄学算法。针对总解数范围不大的题目可以尝试用该方案。经验大概可以支持到长度为$20$以下的数组随机排序。
+
+[1815. 得到新鲜甜甜圈的最多组数](https://leetcode-cn.com/problems/maximum-number-of-groups-getting-fresh-donuts/) 该题也可以使用退火算法
+
+```Kotlin
+import kotlin.math.exp
+
+class Solution5756 {
+    // 模拟退火算法 玄学
+    // Simulated annealing
+    fun minimumXORSum(nums1: IntArray, nums2: IntArray): Int {
+        val eps = 1e-5
+        val delta = 0.98
+        var ans = Int.MAX_VALUE
+        val n = nums1.size
+
+        fun getSum(): Int {
+            var cur = 0
+            for (i in nums1.indices) {
+                cur += nums1[i] xor nums2[i]
+            }
+            ans = minOf(ans, cur)
+            return cur
+        }
+
+        fun sa() {
+            var t = 1e6
+            while (t > eps) {
+                val x: Int = (0 until n).random()
+                val y: Int = (0 until n).random()
+                val last: Int = getSum()
+                nums2.swap(x, y)
+                val now: Int = getSum()
+                val diff = now - last
+                // 取最小值
+                if (diff > 0 && exp(-1.0 * diff / t) * n <= (0 until n).random()) {
+                    // 还原操作
+                    nums2.swap(x, y)
+                }
+                t *= delta
+            }
+        }
+        repeat(20) {
+            sa()
+        }
+        return ans
+    }
+}
+```
+
