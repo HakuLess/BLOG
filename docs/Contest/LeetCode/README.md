@@ -4,6 +4,8 @@
 
 [第 246 场周赛](../LeetCode/WC246.md)
 
+[第 245 场周赛](../LeetCode/WC245.md)
+
 [第 244 场周赛](../LeetCode/WC244.md)
 
 [第 243 场周赛](../LeetCode/WC243.md)
