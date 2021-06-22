@@ -56,6 +56,8 @@
 
 ### LeetCode双周赛题解
 
+[第 54 场双周赛](../LeetCode/BWC54.md)
+
 [第 53 场双周赛](../LeetCode/BWC53.md)
 
 [第 51 场双周赛](../LeetCode/BWC51.md)
