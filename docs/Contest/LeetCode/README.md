@@ -2,6 +2,8 @@
 
 ### LeetCode周赛题解
 
+[第 250 场周赛](../LeetCode/WC250.md)
+
 [第 249 场周赛](../LeetCode/WC249.md)
 
 [第 246 场周赛](../LeetCode/WC246.md)
@@ -81,3 +83,5 @@
 [第 43 场双周赛](../LeetCode/BWC43.md)
 
 [第 42 场双周赛](../LeetCode/BWC42.md)
+
+[第 41 场双周赛](../LeetCode/BWC41.md)

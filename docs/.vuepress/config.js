@@ -39,6 +39,7 @@ module.exports = {
                     title: '周赛',
                     collapsable: true,
                     children: [
+                        { title: '第 250 场周赛', path: '/Contest/LeetCode/WC250.md' },
                         { title: '第 249 场周赛', path: '/Contest/LeetCode/WC249.md' },
                         { title: '第 246 场周赛', path: '/Contest/LeetCode/WC246.md' },
                         { title: '第 245 场周赛', path: '/Contest/LeetCode/WC245.md' },
@@ -84,6 +85,7 @@ module.exports = {
                         { title: '第 44 场双周赛', path: '/Contest/LeetCode/BWC44.md' },
                         { title: '第 43 场双周赛', path: '/Contest/LeetCode/BWC43.md' },
                         { title: '第 42 场双周赛', path: '/Contest/LeetCode/BWC42.md' },
+                        { title: '第 41 场双周赛', path: '/Contest/LeetCode/BWC41.md' },
                     ]
                 }
             ]
