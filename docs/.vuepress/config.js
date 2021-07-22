@@ -86,6 +86,7 @@ module.exports = {
                         { title: '第 43 场双周赛', path: '/Contest/LeetCode/BWC43.md' },
                         { title: '第 42 场双周赛', path: '/Contest/LeetCode/BWC42.md' },
                         { title: '第 41 场双周赛', path: '/Contest/LeetCode/BWC41.md' },
+                        { title: '第 30 场双周赛', path: '/Contest/LeetCode/BWC30.md' },
                     ]
                 }
             ]
