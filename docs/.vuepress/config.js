@@ -40,6 +40,7 @@ module.exports = {
                     collapsable: true,
                     children: [
                         { title: '第 260 场周赛', path: '/Contest/LeetCode/WC260.md' },
+                        { title: '第 259 场周赛', path: '/Contest/LeetCode/WC259.md' },
                         { title: '第 258 场周赛', path: '/Contest/LeetCode/WC258.md' },
                         { title: '第 257 场周赛', path: '/Contest/LeetCode/WC257.md' },
                         { title: '第 256 场周赛', path: '/Contest/LeetCode/WC256.md' },
