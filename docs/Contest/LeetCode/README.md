@@ -2,6 +2,8 @@
 
 ### LeetCode周赛题解
 
+[第 261 场周赛](../LeetCode/WC261.md)
+
 [第 260 场周赛](../LeetCode/WC260.md)
 
 [第 259 场周赛](../LeetCode/WC259.md)
@@ -77,6 +79,8 @@
 [第 221 场周赛](../LeetCode/WC221.md)
 
 ### LeetCode双周赛题解
+
+[第 62 场双周赛](../LeetCode/BWC62.md)
 
 [第 61 场双周赛](../LeetCode/BWC61.md)
 
