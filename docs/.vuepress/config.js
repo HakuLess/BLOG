@@ -89,6 +89,7 @@ module.exports = {
                     title: '双周赛',
                     collapsable: true,
                     children: [
+                        { title: '第 65 场双周赛', path: '/Contest/LeetCode/BWC65.md' },
                         { title: '第 64 场双周赛', path: '/Contest/LeetCode/BWC64.md' },
                         { title: '第 63 场双周赛', path: '/Contest/LeetCode/BWC63.md' },
                         { title: '第 62 场双周赛', path: '/Contest/LeetCode/BWC62.md' },
