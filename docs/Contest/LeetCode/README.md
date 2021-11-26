@@ -2,6 +2,8 @@
 
 ### LeetCode周赛题解
 
+[第 268 场周赛](../LeetCode/WC268.md)
+
 [第 267 场周赛](../LeetCode/WC267.md)
 
 [第 266 场周赛](../LeetCode/WC266.md)
