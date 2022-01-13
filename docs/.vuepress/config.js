@@ -127,6 +127,15 @@ module.exports = {
                 }
             ]
         },
+        '/Contest/CodeForces/': [
+            {
+                title: 'Round',
+                collapsable: true,
+                children: [
+                    { title: 'CodeForces Round 764', path: '/Contest/CodeForces/CR764.md' },
+                ]
+            }
+        ],
     },
     markdown: {
         lineNumbers: true,
