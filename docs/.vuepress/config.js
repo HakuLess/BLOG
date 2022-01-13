@@ -125,17 +125,17 @@ module.exports = {
                         { title: '第 30 场双周赛', path: '/Contest/LeetCode/BWC30.md' },
                     ]
                 }
-            ]
-        },
-        '/Contest/CodeForces/': [
-            {
-                title: 'Round',
-                collapsable: true,
-                children: [
-                    { title: 'CodeForces Round 764', path: '/Contest/CodeForces/CR764.md' },
-                ]
-            }
-        ],
+            ],
+            '/Contest/CodeForces/': [
+                {
+                    title: 'Round',
+                    collapsable: true,
+                    children: [
+                        { title: 'CodeForces Round 764', path: '/Contest/CodeForces/CR764.md' },
+                    ]
+                }
+            ],
+        }
     },
     markdown: {
         lineNumbers: true,
