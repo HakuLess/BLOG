@@ -118,6 +118,8 @@
 
 ### LeetCode双周赛题解
 
+[第 72 场双周赛](../LeetCode/BWC72.md)
+
 [第 71 场双周赛](../LeetCode/BWC71.md)
 
 [第 70 场双周赛](../LeetCode/BWC70.md)
