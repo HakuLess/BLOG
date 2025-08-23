@@ -39,14 +39,29 @@ jobs:
       - name: Check target repository
         run: |
           echo "Checking access to HakuLess/HakuLess.github.io..."
-          curl -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
-               https://api.github.com/repos/HakuLess/HakuLess.github.io
+          echo "PAT_TOKEN length: ${#PAT_TOKEN}"
+          response=$(curl -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
+               https://api.github.com/repos/HakuLess/HakuLess.github.io)
+          echo "Response: $response"
+          if [[ $response == *"Not Found"* ]]; then
+            echo "Repository not found! Creating it..."
+            curl -X POST -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
+                 -H "Accept: application/vnd.github.v3+json" \
+                 https://api.github.com/user/repos \
+                 -d '{"name":"HakuLess.github.io","description":"HaKu Blog","private":false,"has_wiki":false,"has_issues":false}'
+          fi
+      
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git config --global credential.helper store
       
       - name: Deploy to HakuLess.github.io
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: docs/.vuepress/dist/
-          branch: master
+          branch: main
           repository-name: HakuLess/HakuLess.github.io
           clean: true
           token: ${{ secrets.PAT_TOKEN }}
