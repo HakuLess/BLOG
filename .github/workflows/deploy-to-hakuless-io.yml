@@ -7,8 +7,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   build:
@@ -42,3 +40,5 @@ jobs:
           repository-name: HakuLess/HakuLess.github.io
           clean: true
           token: ${{ secrets.GITHUB_TOKEN }}
+          git-config-name: GitHub Actions
+          git-config-email: actions@github.com
