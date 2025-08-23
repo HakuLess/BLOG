@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
+      - name: Clear cache
+        run: rm -rf docs/.vuepress/dist
+      
       - name: Build docs
         run: npm run docs:build
       

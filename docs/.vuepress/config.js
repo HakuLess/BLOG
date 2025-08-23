@@ -1,7 +1,7 @@
 module.exports = {
     title: 'HaKu’s Blog',
     description: 'Just playing around',
-    base: '/',
+    base: '/BLOG/',
     themeConfig: {
         nav: [
             { text: 'Home', link: '/' },
