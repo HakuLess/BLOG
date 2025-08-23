@@ -32,6 +32,12 @@ jobs:
       - name: Build docs
         run: npm run docs:build
       
+      - name: Check target repository
+        run: |
+          echo "Checking access to HakuLess/HakuLess.github.io..."
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               https://api.github.com/repos/HakuLess/HakuLess.github.io
+      
       - name: Deploy to HakuLess.github.io
         uses: JamesIves/github-pages-deploy-action@v4
         with:
@@ -42,3 +48,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           git-config-name: GitHub Actions
           git-config-email: actions@github.com
+          force: true
