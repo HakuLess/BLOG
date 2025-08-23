@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,7 +39,7 @@ jobs:
       - name: Check target repository
         run: |
           echo "Checking access to HakuLess/HakuLess.github.io..."
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          curl -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
                https://api.github.com/repos/HakuLess/HakuLess.github.io
       
       - name: Deploy to HakuLess.github.io
@@ -49,7 +49,7 @@ jobs:
           branch: master
           repository-name: HakuLess/HakuLess.github.io
           clean: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
           git-config-name: GitHub Actions
           git-config-email: actions@github.com
           force: true
