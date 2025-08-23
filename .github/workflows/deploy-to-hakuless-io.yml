@@ -9,6 +9,8 @@ permissions:
   contents: write
   actions: write
   deployments: write
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -40,16 +42,23 @@ jobs:
         run: |
           echo "Checking access to HakuLess/HakuLess.github.io..."
           echo "PAT_TOKEN length: ${#PAT_TOKEN}"
+          echo "Checking repository access..."
           response=$(curl -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
                https://api.github.com/repos/HakuLess/HakuLess.github.io)
           echo "Response: $response"
           if [[ $response == *"Not Found"* ]]; then
             echo "Repository not found! Creating it..."
-            curl -X POST -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
+            create_response=$(curl -X POST -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
                  -H "Accept: application/vnd.github.v3+json" \
                  https://api.github.com/user/repos \
-                 -d '{"name":"HakuLess.github.io","description":"HaKu Blog","private":false,"has_wiki":false,"has_issues":false}'
+                 -d '{"name":"HakuLess.github.io","description":"HaKu Blog","private":false,"has_wiki":false,"has_issues":false}')
+            echo "Create response: $create_response"
           fi
+          
+          echo "Checking user permissions..."
+          user_response=$(curl -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
+               https://api.github.com/user)
+          echo "User info: $user_response"
       
       - name: Configure Git
         run: |
@@ -61,7 +70,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: docs/.vuepress/dist/
-          branch: main
+          branch: master
           repository-name: HakuLess/HakuLess.github.io
           clean: true
           token: ${{ secrets.PAT_TOKEN }}
