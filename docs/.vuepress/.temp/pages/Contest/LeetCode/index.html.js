@@ -1,3 +1,16 @@
 import comp from "D:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/LeetCode/index.html.vue"
-const data = JSON.parse("{\"path\":\"/Contest/LeetCode/\",\"title\":\"\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"git\":{\"createdTime\":1610983166000,\"updatedTime\":1646646312000,\"contributors\":[{\"name\":\"HaKu\",\"username\":\"HaKu\",\"email\":\"335279429@qq.com\",\"commits\":7,\"url\":\"https://github.com/HaKu\"},{\"name\":\"马双飞\",\"username\":\"\",\"email\":\"mashuangfei@meituan.com\",\"commits\":33},{\"name\":\"mashuangfei\",\"username\":\"mashuangfei\",\"email\":\"mashuangfei@meituan.com\",\"commits\":33,\"url\":\"https://github.com/mashuangfei\"}]},\"readingTime\":{\"minutes\":1.95,\"words\":586},\"filePathRelative\":\"Contest/LeetCode/README.md\"}")
+const data = JSON.parse("{\"path\":\"/Contest/LeetCode/\",\"title\":\"\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"readingTime\":{\"minutes\":1.95,\"words\":586},\"filePathRelative\":\"Contest/LeetCode/README.md\"}")
 export { comp, data }
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
+}
