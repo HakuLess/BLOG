@@ -1,0 +1,3 @@
+import comp from "D:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/CodeForces/CR764.html.vue"
+const data = JSON.parse("{\"path\":\"/Contest/CodeForces/CR764.html\",\"title\":\"Codeforces Round #764 (Div. 3)题解\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"git\":{\"createdTime\":1642044050000,\"updatedTime\":1642044050000,\"contributors\":[{\"name\":\"mashuangfei\",\"username\":\"mashuangfei\",\"email\":\"mashuangfei@meituan.com\",\"commits\":1,\"url\":\"https://github.com/mashuangfei\"}]},\"readingTime\":{\"minutes\":5.3,\"words\":1591},\"filePathRelative\":\"Contest/CodeForces/CR764.md\"}")
+export { comp, data }

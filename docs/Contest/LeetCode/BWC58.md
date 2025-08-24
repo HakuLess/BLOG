@@ -72,7 +72,7 @@ class Solution5827 {
 
 设$DP[i][j]$为第$j$次调整后，前$i$​​位的浪费值：
 
-$dp[i][j] = \min\limits_{0 <= l <=j}\{{dp[l - 1][j - 1]} + cost[l][i]\}$
+$dp[i][j] = \min\limits_{0 \leq l \leq j}\{dp[l - 1][j - 1] + cost[l][i]\}$
 
 ```kotlin
 class Solution5828 {

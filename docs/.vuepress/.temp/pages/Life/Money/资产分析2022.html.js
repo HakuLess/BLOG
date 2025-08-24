@@ -1,0 +1,3 @@
+import comp from "D:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Life/Money/资产分析2022.html.vue"
+const data = JSON.parse("{\"path\":\"/Life/Money/%E8%B5%84%E4%BA%A7%E5%88%86%E6%9E%902022.html\",\"title\":\"\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"git\":{\"createdTime\":1643527870000,\"updatedTime\":1755938813000,\"contributors\":[{\"name\":\"mashuangfei\",\"username\":\"mashuangfei\",\"email\":\"mashuangfei@meituan.com\",\"commits\":1,\"url\":\"https://github.com/mashuangfei\"},{\"name\":\"HaKu\",\"username\":\"HaKu\",\"email\":\"335279429@qq.com\",\"commits\":1,\"url\":\"https://github.com/HaKu\"}]},\"readingTime\":{\"minutes\":0.28,\"words\":83},\"filePathRelative\":\"Life/Money/资产分析2022.md\"}")
+export { comp, data }

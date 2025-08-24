@@ -1,0 +1,3 @@
+import comp from "D:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Life/Money/index.html.vue"
+const data = JSON.parse("{\"path\":\"/Life/Money/\",\"title\":\"\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"git\":{\"createdTime\":1610983166000,\"updatedTime\":1755938813000,\"contributors\":[{\"name\":\"HaKu\",\"username\":\"HaKu\",\"email\":\"335279429@qq.com\",\"commits\":4,\"url\":\"https://github.com/HaKu\"},{\"name\":\"马双飞\",\"username\":\"\",\"email\":\"mashuangfei@meituan.com\",\"commits\":1},{\"name\":\"mashuangfei\",\"username\":\"mashuangfei\",\"email\":\"mashuangfei@meituan.com\",\"commits\":1,\"url\":\"https://github.com/mashuangfei\"}]},\"readingTime\":{\"minutes\":0.23,\"words\":69},\"filePathRelative\":\"Life/Money/README.md\"}")
+export { comp, data }
