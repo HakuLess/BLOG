@@ -3,6 +3,8 @@ import { Layout, NotFound, injectDarkMode, setupDarkMode, setupSidebarItems, scr
 import { defineCatalogInfoGetter } from "D:/WorkSpace/BLOG/node_modules/@vuepress/plugin-catalog/lib/client/index.js"
 import { h } from "vue"
 import { resolveComponent } from "vue"
+import { GlobalEncrypt, LocalEncrypt } from "D:/WorkSpace/BLOG/node_modules/vuepress-theme-hope/lib/bundle/exports/encrypt.js";
+import "D:/WorkSpace/BLOG/node_modules/vuepress-theme-hope/lib/bundle/styles/encrypt/bundle.scss"
 
 import "D:/WorkSpace/BLOG/node_modules/@vuepress/helper/lib/client/styles/colors.css";
 import "D:/WorkSpace/BLOG/node_modules/@vuepress/helper/lib/client/styles/normalize.css";
@@ -35,7 +37,8 @@ export default {
     // inject global properties
     injectDarkMode(app);
 
-
+    app.component("GlobalEncrypt", GlobalEncrypt);
+    app.component("LocalEncrypt", LocalEncrypt);
   },
   setup: () => {
     setupDarkMode();

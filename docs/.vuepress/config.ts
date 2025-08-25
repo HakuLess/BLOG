@@ -27,6 +27,14 @@ export default defineUserConfig({
       },
     },
 
+    // 目录加密：为 /Life/Money/ 下所有页面设置访问口令
+    encrypt: {
+      // 将下面的口令替换为你自己的
+      config: {
+        "/Life/Money/": ["900915"],
+      },
+    },
+
     // 导航栏配置
     navbar: [
       { text: "Home", link: "/" },
