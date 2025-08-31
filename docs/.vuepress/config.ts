@@ -38,6 +38,7 @@ export default defineUserConfig({
     // 导航栏配置
     navbar: [
       { text: "Home", link: "/" },
+      { text: "📋 简历", link: "/resume.html" },
       {
         text: "Contest",
         children: [

@@ -2,6 +2,7 @@ export const redirects = JSON.parse("{}")
 
 export const routes = Object.fromEntries([
   ["/", { loader: () => import(/* webpackChunkName: "index.html" */"D:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/index.html.js"), meta: {"title":"HaKu's Blog"} }],
+  ["/resume.html", { loader: () => import(/* webpackChunkName: "resume.html" */"D:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/resume.html.js"), meta: {"title":"马双飞 - Android开发工程师"} }],
   ["/Life/Money/", { loader: () => import(/* webpackChunkName: "Life_Money_index.html" */"D:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Life/Money/index.html.js"), meta: {"title":""} }],
   ["/Life/Money/%E8%B5%84%E4%BA%A7%E5%88%86%E6%9E%902020.html", { loader: () => import(/* webpackChunkName: "Life_Money_资产分析2020.html" */"D:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Life/Money/资产分析2020.html.js"), meta: {"title":""} }],
   ["/Life/Money/%E8%B5%84%E4%BA%A7%E5%88%86%E6%9E%902021.html", { loader: () => import(/* webpackChunkName: "Life_Money_资产分析2021.html" */"D:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Life/Money/资产分析2021.html.js"), meta: {"title":""} }],
