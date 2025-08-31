@@ -9,11 +9,11 @@
 <hr>
 <h2 id="👨‍💻-个人简介" tabindex="-1"><a class="header-anchor" href="#👨‍💻-个人简介"><span>👨‍💻 个人简介</span></a></h2>
 <ul>
-<li>🏆 <strong>9年+</strong> Android开发经验，参与过多个千万级用户产品开发</li>
-<li>🚀 熟练掌握基础算法，固定每周参加 <strong>LeetCode 周赛</strong></li>
-<li>💎 熟练掌握 <strong>Kotlin</strong> 语言，在工作过程中大量使用各类高阶用法</li>
-<li>📚 良好的编程习惯，注重代码结构、注释清晰度、文档归档</li>
-<li>🤖 乐于学习新知识，认可 <strong>AI</strong> 是未来的发展方向</li>
+<li><strong>9年+</strong> Android开发经验，参与过多个千万级用户产品开发</li>
+<li>熟练掌握基础算法，固定每周参加 <strong>LeetCode 周赛</strong></li>
+<li>熟练掌握 <strong>Kotlin</strong> 语言，在工作过程中大量使用各类高阶用法</li>
+<li>良好的编程习惯，注重代码结构、注释清晰度、文档归档</li>
+<li>乐于学习新知识，认可 <strong>AI</strong> 是未来的发展方向</li>
 </ul>
 <hr>
 <h2 id="🛠️-技能水平" tabindex="-1"><a class="header-anchor" href="#🛠️-技能水平"><span>🛠️ 技能水平</span></a></h2>
@@ -22,8 +22,7 @@
 <p class="hint-container-title">Kotlin语言 ⭐⭐⭐⭐⭐</p>
 <p>熟练掌握各类高阶用法，并运用在工程实践中</p>
 <ul>
-<li>高阶函数、扩展函数、重载运算符</li>
-<li>协程、密封类、内联函数</li>
+<li>高阶函数、扩展函数、重载运算符、密封类、内联函数</li>
 </ul>
 </div>
 <div class="hint-container tip">
@@ -43,14 +42,14 @@
 <li>兼容 Android、iOS、鸿蒙系统</li>
 </ul>
 </div>
-<h3 id="开发工具" tabindex="-1"><a class="header-anchor" href="#开发工具"><span>开发工具</span></a></h3>
-<details class="hint-container details"><summary>Git 版本控制 ⭐⭐⭐⭐⭐</summary>
+<div class="hint-container tip">
+<p class="hint-container-title">Git 版本控制 ⭐⭐⭐⭐⭐</p>
 <p>与大量开发人员共同维护巨型 APP，善于处理各类冲突、异常状态</p>
 <ul>
 <li>熟练掌握 git-flow 工作流</li>
 <li>多仓库管理经验</li>
 </ul>
-</details>
+</div>
 <h3 id="语言能力" tabindex="-1"><a class="header-anchor" href="#语言能力"><span>语言能力</span></a></h3>
 <table>
 <thead>
@@ -62,13 +61,8 @@
 </thead>
 <tbody>
 <tr>
-<td>🇨🇳 中文</td>
-<td>母语</td>
-<td>-</td>
-</tr>
-<tr>
 <td>🇺🇸 英语</td>
-<td>熟练</td>
+<td>良好</td>
 <td>CET-6</td>
 </tr>
 <tr>
@@ -80,10 +74,12 @@
 </table>
 <hr>
 <h2 id="💼-工作经验" tabindex="-1"><a class="header-anchor" href="#💼-工作经验"><span>💼 工作经验</span></a></h2>
-<h3 id="🔥-上海瑾盛通信科技有限公司【oppo】" tabindex="-1"><a class="header-anchor" href="#🔥-上海瑾盛通信科技有限公司【oppo】"><span>🔥 上海瑾盛通信科技有限公司【OPPO】</span></a></h3>
-<p><strong>Android 开发</strong> | 2025.06 ~ 至今 | 上海</p>
+<h3 id="传音控股" tabindex="-1"><a class="header-anchor" href="#传音控股"><span>传音控股</span></a></h3>
+<p><strong>Android 开发</strong> | 2025.08 ~ 至今 | 上海</p>
+<h3 id="oppo【上海瑾盛通信科技有限公司】" tabindex="-1"><a class="header-anchor" href="#oppo【上海瑾盛通信科技有限公司】"><span>OPPO【上海瑾盛通信科技有限公司】</span></a></h3>
+<p><strong>Android 开发</strong> | 2025.06 ~ 2025.06 | 上海</p>
 <hr>
-<h3 id="🚀-互诚信息技术-上海-有限公司【美团点评】" tabindex="-1"><a class="header-anchor" href="#🚀-互诚信息技术-上海-有限公司【美团点评】"><span>🚀 互诚信息技术（上海）有限公司【美团点评】</span></a></h3>
+<h3 id="美团点评【互诚信息技术-上海-有限公司】" tabindex="-1"><a class="header-anchor" href="#美团点评【互诚信息技术-上海-有限公司】"><span>美团点评【互诚信息技术（上海）有限公司】</span></a></h3>
 <p><strong>Android 开发</strong> | 2016.05 ~ 2025.04 | 上海</p>
 <h4 id="📱-点评客户端团队-2019-12-2025-04" tabindex="-1"><a class="header-anchor" href="#📱-点评客户端团队-2019-12-2025-04"><span>📱 点评客户端团队 <code v-pre>2019.12 ~ 2025.04</code></span></a></h4>
 <ul>
@@ -170,7 +166,7 @@
 <div class="hint-container warning">
 <p class="hint-container-title">🎬 Google 合作项目</p>
 <p>参与点评与 Google 合作的 Kotlin 宣传视频拍摄<br>
-<strong>视频链接：</strong> <a href="https://www.bilibili.com/video/BV1xx411c7mu" target="_blank" rel="noopener noreferrer">大众点评用 Kotlin 打造灵活稳定兼备的应用 | Android 开发者故事</a></p>
+<strong>视频链接：</strong><a href="https://www.bilibili.com/video/BV1Tz4y1k7Lv" target="_blank" rel="noopener noreferrer">大众点评用 Kotlin 打造灵活稳定兼备的应用 | Android 开发者故事_哔哩哔哩_bilibili</a></p>
 </div>
 <div class="hint-container info">
 <p class="hint-container-title">💡 技术特长</p>
