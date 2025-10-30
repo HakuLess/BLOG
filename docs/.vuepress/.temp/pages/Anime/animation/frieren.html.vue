@@ -54,6 +54,7 @@
     <div id="records-content"></div>
   </div>
 </div>
+<div class="character-grid">
   <div class="character-card">
     <div class="character-avatar">
       <img src="https://via.placeholder.com/120x120/FF6B6B/FFFFFF?text=芙莉莲" alt="芙莉莲">
@@ -161,66 +162,48 @@
 </div></template>
 
 <script>
-// 导入Firebase服务
-import { AnimeService } from '../../.vuepress/services/animeService.js';
-
-// 全局变量
-let animeService;
-let currentAnimeId;
+// 静态数据，用于构建时的兼容性
+const staticAnimeData = {
+  frieren: {
+    title: "葬送的芙莉莲",
+    subtitle: "Sousou no Frieren",
+    coverImage: "https://via.placeholder.com/300x420/FF6B6B/FFFFFF?text=芙莉莲",
+    studio: "MADHOUSE",
+    airDate: "2023年9月",
+    totalEpisodes: 28,
+    rating: 9.8,
+    status: "completed",
+    genres: ["奇幻", "剧情", "冒险"],
+    summary: "这部作品真的是近年来最治愈的动画之一。芙莉莲作为精灵的时间观念与人类的短暂生命形成强烈对比，每一个回忆都让人泪目。",
+    characters: [
+      {
+        name: "芙莉莲",
+        role: "主角",
+        description: "精灵魔法使，活了1000多年。曾是勇者队伍的一员，在辛美尔死后开始理解人类的旅程。",
+        avatar: "https://via.placeholder.com/120x120/FF6B6B/FFFFFF?text=芙莉莲"
+      }
+    ]
+  }
+};
 
 // 页面加载完成后初始化
-document.addEventListener('DOMContentLoaded', async function() {
-  try {
-    animeService = new AnimeService();
-    
-    // 从URL获取动画ID，如果没有则使用默认ID
-    currentAnimeId = getAnimeIdFromUrl() || 'frieren';
-    
-    await loadAnimeDetail();
-  } catch (error) {
-    console.error('初始化失败:', error);
-    showErrorState();
-  }
-});
-
-// 从URL获取动画ID
-function getAnimeIdFromUrl() {
-  const path = window.location.pathname;
-  const matches = path.match(/\/animation\/([^\/]+)\.html?$/);
-  return matches ? matches[1] : null;
-}
-
-// 加载动画详情
-async function loadAnimeDetail() {
-  try {
-    showLoadingState();
-    
-    // 从Firebase获取动画详情
-    const anime = await animeService.getAnimeById(currentAnimeId);
-    
-    if (!anime) {
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', function() {
+    try {
+      const currentAnimeId = 'frieren';
+      const anime = staticAnimeData[currentAnimeId];
+      
+      if (anime) {
+        renderAnimeDetail(anime);
+        showContent();
+      } else {
+        showErrorState();
+      }
+    } catch (error) {
+      console.error('初始化失败:', error);
       showErrorState();
-      return;
     }
-    
-    // 渲染动画详情
-    renderAnimeDetail(anime);
-    
-    // 显示内容并隐藏加载状态
-    hideLoadingState();
-    showContent();
-    
-  } catch (error) {
-    console.error('加载动画详情失败:', error);
-    showErrorState();
-  }
-}
-
-// 显示加载状态
-function showLoadingState() {
-  document.getElementById('loading-state').style.display = 'block';
-  document.getElementById('error-state').style.display = 'none';
-  document.getElementById('anime-content').style.display = 'none';
+  });
 }
 
 // 显示错误状态
@@ -230,14 +213,10 @@ function showErrorState() {
   document.getElementById('anime-content').style.display = 'none';
 }
 
-// 隐藏加载状态并显示内容
-function hideLoadingState() {
-  document.getElementById('loading-state').style.display = 'none';
-  document.getElementById('error-state').style.display = 'none';
-}
-
 // 显示内容
 function showContent() {
+  document.getElementById('loading-state').style.display = 'none';
+  document.getElementById('error-state').style.display = 'none';
   document.getElementById('anime-content').style.display = 'block';
 }
 
@@ -260,11 +239,6 @@ function renderAnimeDetail(anime) {
   // 渲染各个内容区域
   renderSummary(anime.summary);
   renderCharacters(anime.characters);
-  renderImpressions(anime.impressions);
-  renderEpisodes(anime.episodes);
-  renderAwards(anime.awards);
-  renderLinks(anime.links);
-  renderRecords(anime.records);
 }
 
 // 渲染元数据
@@ -318,120 +292,6 @@ function renderCharacters(characters) {
   `).join('');
 }
 
-// 渲染观看感想
-function renderImpressions(impressions) {
-  const container = document.getElementById('impressions-content');
-  
-  if (!impressions || impressions.length === 0) {
-    container.innerHTML = '<p>暂无观看感想</p>';
-    return;
-  }
-  
-  container.innerHTML = impressions.map(impression => `
-    <div class="impression-item">
-      <h4>${impression.title}</h4>
-      <p>${impression.content}</p>
-    </div>
-  `).join('');
-}
-
-// 渲染分集评价
-function renderEpisodes(episodes) {
-  const container = document.getElementById('episodes-content');
-  
-  if (!episodes || episodes.length === 0) {
-    container.innerHTML = '<p>暂无分集评价</p>';
-    return;
-  }
-  
-  container.innerHTML = `
-    <div class="episodes-grid">
-      ${episodes.map(episode => `
-        <div class="episode-card">
-          <div class="episode-header">
-            <span class="episode-number">第${episode.number}集</span>
-            <span class="episode-rating">⭐ ${episode.rating}/10</span>
-          </div>
-          <h4 class="episode-title">${episode.title}</h4>
-          <p class="episode-comment">${episode.comment || ''}</p>
-        </div>
-      `).join('')}
-    </div>
-  `;
-}
-
-// 渲染获奖记录
-function renderAwards(awards) {
-  const container = document.getElementById('awards-content');
-  
-  if (!awards || awards.length === 0) {
-    container.innerHTML = '<p>暂无获奖记录</p>';
-    return;
-  }
-  
-  container.innerHTML = `
-    <div class="awards-list">
-      ${awards.map(award => `
-        <div class="award-item">
-          <div class="award-icon">🏆</div>
-          <div class="award-info">
-            <h4>${award.name}</h4>
-            <p>${award.year} · ${award.category}</p>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-}
-
-// 渲染相关链接
-function renderLinks(links) {
-  const container = document.getElementById('links-content');
-  
-  if (!links || links.length === 0) {
-    container.innerHTML = '<p>暂无相关链接</p>';
-    return;
-  }
-  
-  container.innerHTML = `
-    <div class="links-grid">
-      ${links.map(link => `
-        <a href="${link.url}" target="_blank" class="link-card">
-          <div class="link-icon">${link.icon || '🔗'}</div>
-          <div class="link-info">
-            <h4>${link.name}</h4>
-            <p>${link.description || ''}</p>
-          </div>
-        </a>
-      `).join('')}
-    </div>
-  `;
-}
-
-// 渲染观看记录
-function renderRecords(records) {
-  const container = document.getElementById('records-content');
-  
-  if (!records || records.length === 0) {
-    container.innerHTML = '<p>暂无观看记录</p>';
-    return;
-  }
-  
-  container.innerHTML = `
-    <div class="records-timeline">
-      ${records.map(record => `
-        <div class="record-item">
-          <div class="record-date">${record.date}</div>
-          <div class="record-content">
-            <h4>${record.title}</h4>
-            <p>${record.description}</p>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-}
-
 // 获取状态文本
 function getStatusText(status) {
   const statusMap = {
@@ -443,9 +303,6 @@ function getStatusText(status) {
   };
   return statusMap[status] || '未知状态';
 }
-
-// 全局函数，供重新加载按钮调用
-window.loadAnimeDetail = loadAnimeDetail;
 </script>
 
 <style>

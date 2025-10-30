@@ -63,7 +63,8 @@
     <!-- 漫画卡片将通过JavaScript动态生成 -->
   </div>
 </div>
-  
+
+<div class="manga-grid">
   <!-- 漫画卡片 1 -->
   <div class="manga-card" data-genre="comedy,action,slice-of-life" data-status="reading" data-rating="9.3">
     <div class="manga-cover">
@@ -570,13 +571,37 @@
 </style>
 
 <script>
-// 导入Firebase服务
-import { AnimeService } from '../.vuepress/services/animeService.js';
+// 静态数据，用于构建时的兼容性
+const staticMangaData = [
+  {
+    id: 'spy-family',
+    title: '间谍过家家',
+    subtitle: 'SPY×FAMILY',
+    author: '远藤达哉',
+    status: 'ongoing',
+    rating: 9.5,
+    genres: ['喜剧', '动作', '家庭'],
+    year: 2019,
+    coverImage: 'https://via.placeholder.com/200x280/FF6B6B/FFFFFF?text=间谍过家家',
+    summary: '为了完成任务，间谍黄昏需要组建一个家庭。'
+  },
+  {
+    id: 'frieren',
+    title: '葬送的芙莉莲',
+    subtitle: 'Sousou no Frieren',
+    author: '山田钟人',
+    status: 'ongoing',
+    rating: 9.8,
+    genres: ['奇幻', '剧情', '冒险'],
+    year: 2020,
+    coverImage: 'https://via.placeholder.com/200x280/4ECDC4/FFFFFF?text=芙莉莲',
+    summary: '精灵魔法使芙莉莲在勇者死后开始理解人类的旅程。'
+  }
+];
 
 // 全局变量
-let allMangas = [];
-let filteredMangas = [];
-let animeService;
+let allMangas = staticMangaData;
+let filteredMangas = staticMangaData;
 
 // 防抖函数
 function debounce(func, wait) {
@@ -592,25 +617,24 @@ function debounce(func, wait) {
 }
 
 // 页面加载完成后初始化
-document.addEventListener('DOMContentLoaded', async function() {
-  try {
-    animeService = new AnimeService();
-    await loadMangaData();
-    setupEventListeners();
-  } catch (error) {
-    console.error('初始化失败:', error);
-    showErrorState();
-  }
-});
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', function() {
+    try {
+      loadMangaData();
+      setupEventListeners();
+    } catch (error) {
+      console.error('初始化失败:', error);
+      showErrorState();
+    }
+  });
+}
 
 // 加载漫画数据
-async function loadMangaData() {
+function loadMangaData() {
   try {
     showLoadingState();
     
-    // 从Firebase获取漫画数据
-    allMangas = await animeService.getMangas();
-    
+    // 使用静态数据
     if (allMangas.length === 0) {
       showEmptyState();
       return;
@@ -830,9 +854,13 @@ function applyFilters() {
 // 跳转到漫画详情页
 function goToMangaDetail(mangaId) {
   // 这里可以跳转到具体的漫画详情页
-  window.location.href = `/Anime/manga/${mangaId}.html`;
+  if (typeof window !== 'undefined') {
+    window.location.href = `/Anime/manga/${mangaId}.html`;
+  }
 }
 
 // 全局函数，供重新加载按钮调用
-window.loadMangaData = loadMangaData;
+if (typeof window !== 'undefined') {
+  window.loadMangaData = loadMangaData;
+}
 </script>

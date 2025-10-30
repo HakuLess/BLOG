@@ -186,28 +186,56 @@
 </div></template>
 
 <script type="module">
-// 导入Firebase服务
-import animeService from '../../.vuepress/services/animeService.js';
+// 静态数据，用于构建时的兼容性
+const staticAnimeData = [
+  {
+    id: 'frieren',
+    title: '葬送的芙莉莲',
+    titleEn: 'Sousou no Frieren',
+    year: 2023,
+    episodes: 28,
+    currentEpisode: 28,
+    rating: 9.8,
+    watchStatus: '已完成',
+    genres: ['奇幻', '冒险', '治愈'],
+    coverImage: 'https://via.placeholder.com/200x280/FF6B6B/FFFFFF?text=芙莉莲',
+    summary: '精灵魔法使芙莉莲在勇者死后开始理解人类的旅程。'
+  },
+  {
+    id: 'kusuriya',
+    title: '药屋少女的呢喃',
+    titleEn: 'Kusuriya no Hitorigoto',
+    year: 2023,
+    episodes: 24,
+    currentEpisode: 24,
+    rating: 9.2,
+    watchStatus: '已完成',
+    genres: ['推理', '古风', '宫廷'],
+    coverImage: 'https://via.placeholder.com/200x280/4ECDC4/FFFFFF?text=药屋少女',
+    summary: '在后宫中工作的药师少女猫猫解决各种谜团的故事。'
+  }
+];
 
 // 全局变量
-let allAnimes = [];
-let filteredAnimes = [];
+let allAnimes = staticAnimeData;
+let filteredAnimes = staticAnimeData;
 
 // 页面加载完成后初始化
-document.addEventListener('DOMContentLoaded', function() {
-  loadAnimes();
-  setupEventListeners();
-});
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', function() {
+    loadAnimes();
+    setupEventListeners();
+  });
+}
 
 /**
  * 加载动画数据
  */
-async function loadAnimes() {
+function loadAnimes() {
   try {
     showLoadingState();
     
-    // 从Firebase获取动画数据
-    allAnimes = await animeService.getAnimes();
+    // 使用静态数据
     filteredAnimes = [...allAnimes];
     
     if (allAnimes.length === 0) {
@@ -338,7 +366,9 @@ function getStatusClass(status) {
  * 跳转到详情页
  */
 function goToDetail(animeId) {
-  window.location.href = `/Anime/animation/${animeId}.html`;
+  if (typeof window !== 'undefined') {
+    window.location.href = `/Anime/animation/${animeId}.html`;
+  }
 }
 
 /**
@@ -429,7 +459,9 @@ function debounce(func, wait) {
 }
 
 // 将loadAnimes函数暴露到全局作用域，供重新加载按钮使用
-window.loadAnimes = loadAnimes;
+if (typeof window !== 'undefined') {
+  window.loadAnimes = loadAnimes;
+}
 </script>
 
 <style>

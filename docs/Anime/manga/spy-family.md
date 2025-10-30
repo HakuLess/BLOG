@@ -467,59 +467,60 @@
 </style>
 
 <script>
-// 导入Firebase服务
-import { AnimeService } from '../../.vuepress/services/animeService.js';
-
-// 全局变量
-let animeService;
-let currentMangaId;
+// 静态数据，用于构建时的兼容性
+const staticMangaData = {
+  'spy-family': {
+    title: "间谍过家家",
+    subtitle: "SPY×FAMILY",
+    coverImage: "https://via.placeholder.com/300x420/FF6B6B/FFFFFF?text=间谍过家家",
+    author: "远藤达哉",
+    publisher: "集英社",
+    startDate: "2019年3月",
+    status: "连载中",
+    rating: 9.5,
+    genres: ["喜剧", "动作", "家庭"],
+    summary: "为了完成任务，间谍黄昏需要组建一个家庭。他收养了能读心的少女阿尼亚，并与杀手约儿假结婚。三人各怀秘密却温馨的日常生活就此开始。",
+    characters: [
+      {
+        name: "黄昏/洛伊德·福杰",
+        role: "主角",
+        description: "西国间谍，代号黄昏。为了任务与约儿假结婚，收养阿尼亚。",
+        avatar: "https://via.placeholder.com/120x120/FF6B6B/FFFFFF?text=洛伊德"
+      },
+      {
+        name: "约儿·福杰",
+        role: "主角",
+        description: "东国杀手，代号荆棘公主。与洛伊德假结婚，成为阿尼亚的养母。",
+        avatar: "https://via.placeholder.com/120x120/4ECDC4/FFFFFF?text=约儿"
+      },
+      {
+        name: "阿尼亚·福杰",
+        role: "主角",
+        description: "拥有读心能力的少女，被洛伊德收养。知道养父母的真实身份。",
+        avatar: "https://via.placeholder.com/120x120/45B7D1/FFFFFF?text=阿尼亚"
+      }
+    ]
+  }
+};
 
 // 页面加载完成后初始化
-document.addEventListener('DOMContentLoaded', async function() {
-  try {
-    animeService = new AnimeService();
-    
-    // 从URL获取漫画ID，如果没有则使用默认ID
-    currentMangaId = getMangaIdFromUrl() || 'spy-family';
-    
-    await loadMangaDetail();
-  } catch (error) {
-    console.error('初始化失败:', error);
-    showErrorState();
-  }
-});
-
-// 从URL获取漫画ID
-function getMangaIdFromUrl() {
-  const path = window.location.pathname;
-  const matches = path.match(/\/manga\/([^\/]+)\.html?$/);
-  return matches ? matches[1] : null;
-}
-
-// 加载漫画详情
-async function loadMangaDetail() {
-  try {
-    showLoadingState();
-    
-    // 从Firebase获取漫画详情
-    const manga = await animeService.getMangaById(currentMangaId);
-    
-    if (!manga) {
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', function() {
+    try {
+      const currentMangaId = 'spy-family';
+      const manga = staticMangaData[currentMangaId];
+      
+      if (manga) {
+        renderMangaDetail(manga);
+        showContent();
+      } else {
+        showErrorState();
+      }
+    } catch (error) {
+      console.error('初始化失败:', error);
       showErrorState();
-      return;
     }
-    
-    // 渲染漫画详情
-    renderMangaDetail(manga);
-    
-    // 显示内容并隐藏加载状态
-    hideLoadingState();
-    showContent();
-    
-  } catch (error) {
-    console.error('加载漫画详情失败:', error);
-    showErrorState();
-  }
+  });
 }
 
 // 显示加载状态
@@ -794,5 +795,7 @@ function getStatusText(status) {
 }
 
 // 全局函数，供重新加载按钮调用
-window.loadMangaDetail = loadMangaDetail;
+if (typeof window !== 'undefined') {
+  window.loadMangaDetail = loadMangaDetail;
+}
 </script>

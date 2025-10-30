@@ -10,6 +10,9 @@ export const routes = Object.fromEntries([
   ["/Anime/animation/", { loader: () => import(/* webpackChunkName: "Anime_animation_index.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Anime/animation/index.html.js"), meta: {"title":"🎞️ 动画专区"} }],
   ["/Anime/manga/", { loader: () => import(/* webpackChunkName: "Anime_manga_index.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Anime/manga/index.html.js"), meta: {"title":"📚 漫画专区"} }],
   ["/Anime/manga/spy-family.html", { loader: () => import(/* webpackChunkName: "Anime_manga_spy-family.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Anime/manga/spy-family.html.js"), meta: {"title":"间谍过家家"} }],
+  ["/Contest/AtCoder/", { loader: () => import(/* webpackChunkName: "Contest_AtCoder_index.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/AtCoder/index.html.js"), meta: {"title":""} }],
+  ["/Contest/CodeForces/CR764.html", { loader: () => import(/* webpackChunkName: "Contest_CodeForces_CR764.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/CodeForces/CR764.html.js"), meta: {"title":"Codeforces Round #764 (Div. 3)题解"} }],
+  ["/Contest/CodeForces/", { loader: () => import(/* webpackChunkName: "Contest_CodeForces_index.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/CodeForces/index.html.js"), meta: {"title":""} }],
   ["/Life/Money/", { loader: () => import(/* webpackChunkName: "Life_Money_index.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Life/Money/index.html.js"), meta: {"title":""} }],
   ["/Life/Money/%E8%B5%84%E4%BA%A7%E5%88%86%E6%9E%902020.html", { loader: () => import(/* webpackChunkName: "Life_Money_资产分析2020.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Life/Money/资产分析2020.html.js"), meta: {"title":""} }],
   ["/Life/Money/%E8%B5%84%E4%BA%A7%E5%88%86%E6%9E%902021.html", { loader: () => import(/* webpackChunkName: "Life_Money_资产分析2021.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Life/Money/资产分析2021.html.js"), meta: {"title":""} }],
@@ -17,9 +20,6 @@ export const routes = Object.fromEntries([
   ["/Life/Money/%E8%B5%84%E4%BA%A7%E5%88%86%E6%9E%902024.html", { loader: () => import(/* webpackChunkName: "Life_Money_资产分析2024.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Life/Money/资产分析2024.html.js"), meta: {"title":""} }],
   ["/Life/Money/%E8%B5%84%E4%BA%A7%E5%88%86%E6%9E%902025.html", { loader: () => import(/* webpackChunkName: "Life_Money_资产分析2025.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Life/Money/资产分析2025.html.js"), meta: {"title":""} }],
   ["/Life/Money/%E8%B5%84%E4%BA%A7%E6%80%BB%E8%A7%88.html", { loader: () => import(/* webpackChunkName: "Life_Money_资产总览.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Life/Money/资产总览.html.js"), meta: {"title":""} }],
-  ["/Contest/AtCoder/", { loader: () => import(/* webpackChunkName: "Contest_AtCoder_index.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/AtCoder/index.html.js"), meta: {"title":""} }],
-  ["/Contest/CodeForces/CR764.html", { loader: () => import(/* webpackChunkName: "Contest_CodeForces_CR764.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/CodeForces/CR764.html.js"), meta: {"title":"Codeforces Round #764 (Div. 3)题解"} }],
-  ["/Contest/CodeForces/", { loader: () => import(/* webpackChunkName: "Contest_CodeForces_index.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/CodeForces/index.html.js"), meta: {"title":""} }],
   ["/Contest/LeetCode/BWC30.html", { loader: () => import(/* webpackChunkName: "Contest_LeetCode_BWC30.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/LeetCode/BWC30.html.js"), meta: {"title":"第 30 场双周赛题解"} }],
   ["/Contest/LeetCode/BWC41.html", { loader: () => import(/* webpackChunkName: "Contest_LeetCode_BWC41.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/LeetCode/BWC41.html.js"), meta: {"title":"第 41 场双周赛题解"} }],
   ["/Contest/LeetCode/BWC42.html", { loader: () => import(/* webpackChunkName: "Contest_LeetCode_BWC42.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/LeetCode/BWC42.html.js"), meta: {"title":"第 42 场双周赛题解"} }],
@@ -113,23 +113,6 @@ export const routes = Object.fromEntries([
   ["/Contest/LeetCode/WC282.html", { loader: () => import(/* webpackChunkName: "Contest_LeetCode_WC282.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/LeetCode/WC282.html.js"), meta: {"title":"第 282 场周赛题解"} }],
   ["/Contest/LeetCode/WC283.html", { loader: () => import(/* webpackChunkName: "Contest_LeetCode_WC283.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/LeetCode/WC283.html.js"), meta: {"title":"第 283 场周赛题解"} }],
   ["/404.html", { loader: () => import(/* webpackChunkName: "404.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/404.html.js"), meta: {"title":""} }],
-  ["/Life/", { loader: () => import(/* webpackChunkName: "Life_index.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Life/index.html.js"), meta: {"title":"Life"} }],
   ["/Contest/", { loader: () => import(/* webpackChunkName: "Contest_index.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/index.html.js"), meta: {"title":"Contest"} }],
+  ["/Life/", { loader: () => import(/* webpackChunkName: "Life_index.html" */"E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Life/index.html.js"), meta: {"title":"Life"} }],
 ]);
-
-if (import.meta.webpackHot) {
-  import.meta.webpackHot.accept()
-  if (__VUE_HMR_RUNTIME__.updateRoutes) {
-    __VUE_HMR_RUNTIME__.updateRoutes(routes)
-  }
-  if (__VUE_HMR_RUNTIME__.updateRedirects) {
-    __VUE_HMR_RUNTIME__.updateRedirects(redirects)
-  }
-}
-
-if (import.meta.hot) {
-  import.meta.hot.accept(({ routes, redirects }) => {
-    __VUE_HMR_RUNTIME__.updateRoutes(routes)
-    __VUE_HMR_RUNTIME__.updateRedirects(redirects)
-  })
-}
