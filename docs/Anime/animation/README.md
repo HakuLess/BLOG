@@ -601,11 +601,13 @@
 </style>
 
 <script type="module">
-// 基础JavaScript执行验证
-console.log('=== JavaScript开始执行 ===');
-console.log('页面URL:', window.location.href);
-console.log('当前时间:', new Date().toLocaleString());
-console.log('document.readyState:', document.readyState);
+// 确保只在浏览器环境中运行
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  // 基础JavaScript执行验证
+  console.log('=== JavaScript开始执行 ===');
+  console.log('页面URL:', window.location.href);
+  console.log('当前时间:', new Date().toLocaleString());
+  console.log('document.readyState:', document.readyState);
 
 // 静态数据，用于构建时的兼容性
 const staticAnimeData = [
@@ -923,7 +925,7 @@ function setupEventListeners() {
         exists: !!button,
         visible: button?.offsetParent !== null,
         display: button?.style?.display,
-        computedStyle: button ? window.getComputedStyle(button).display : 'N/A'
+        computedStyle: button && typeof window !== 'undefined' ? window.getComputedStyle(button).display : 'N/A'
       });
     }, 1000);
     
@@ -1349,4 +1351,6 @@ if (typeof document !== 'undefined') {
 if (typeof window !== 'undefined') {
   window.loadAnimes = loadAnimes;
 }
+
+} // 结束浏览器环境检查
 </script>
