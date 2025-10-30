@@ -1,3 +1,0 @@
-import comp from "E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/LeetCode/BWC43.html.vue"
-const data = JSON.parse("{\"path\":\"/Contest/LeetCode/BWC43.html\",\"title\":\"第 43 场双周赛题解\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"git\":{\"createdTime\":1612028291000,\"updatedTime\":1614672666000,\"contributors\":[{\"name\":\"HaKu\",\"username\":\"HaKu\",\"email\":\"335279429@qq.com\",\"commits\":1,\"url\":\"https://github.com/HaKu\"},{\"name\":\"马双飞\",\"username\":\"\",\"email\":\"mashuangfei@meituan.com\",\"commits\":2}]},\"readingTime\":{\"minutes\":2.8,\"words\":840},\"filePathRelative\":\"Contest/LeetCode/BWC43.md\"}")
-export { comp, data }
