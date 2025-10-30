@@ -62,6 +62,11 @@
   <div id="emptyState" class="empty-state" style="display: none;">
     <p>📺 暂无符合条件的动画</p>
   </div>
+  <!-- AI助手浮动按钮 -->
+  <div class="ai-assistant-fab" id="aiAssistantFab" title="AI动漫助手">
+    <span class="ai-fab-icon">🤖</span>
+    <span class="ai-fab-text">AI助手</span>
+  </div>
   <!-- 动画卡片 1 -->
   <div class="anime-card" data-genre="fantasy,adventure" data-status="completed" data-rating="9.5">
     <div class="anime-poster">
@@ -186,6 +191,12 @@
 </div></template>
 
 <script type="module">
+// 基础JavaScript执行验证
+console.log('=== JavaScript开始执行 ===');
+console.log('页面URL:', window.location.href);
+console.log('当前时间:', new Date().toLocaleString());
+console.log('document.readyState:', document.readyState);
+
 // 静态数据，用于构建时的兼容性
 const staticAnimeData = [
   {
@@ -222,10 +233,24 @@ let filteredAnimes = staticAnimeData;
 
 // 页面加载完成后初始化
 if (typeof document !== 'undefined') {
-  document.addEventListener('DOMContentLoaded', function() {
+  console.log('=== 准备绑定DOMContentLoaded事件 ===');
+  console.log('当前document.readyState:', document.readyState);
+  
+  function initializePage() {
+    console.log('=== 开始页面初始化 ===');
+    console.log('DOM已加载完成，开始初始化...');
     loadAnimes();
     setupEventListeners();
-  });
+    console.log('=== 初始化完成 ===');
+  }
+  
+  if (document.readyState === 'loading') {
+    console.log('DOM正在加载中，绑定DOMContentLoaded事件');
+    document.addEventListener('DOMContentLoaded', initializePage);
+  } else {
+    console.log('DOM已经加载完成，直接执行初始化');
+    initializePage();
+  }
 }
 
 /**
@@ -254,44 +279,84 @@ function loadAnimes() {
  * 显示加载状态
  */
 function showLoadingState() {
-  document.getElementById('loadingState').style.display = 'block';
-  document.getElementById('errorState').style.display = 'none';
-  document.getElementById('filtersContainer').style.display = 'none';
-  document.getElementById('animeGrid').style.display = 'none';
-  document.getElementById('emptyState').style.display = 'none';
+  const loadingState = document.getElementById('loadingState');
+  const errorState = document.getElementById('errorState');
+  const filtersContainer = document.getElementById('filtersContainer');
+  const animeGrid = document.getElementById('animeGrid');
+  const emptyState = document.getElementById('emptyState');
+  
+  console.log('showLoadingState - 元素检查:', {
+    loadingState: !!loadingState,
+    errorState: !!errorState,
+    filtersContainer: !!filtersContainer,
+    animeGrid: !!animeGrid,
+    emptyState: !!emptyState
+  });
+  
+  if (loadingState) loadingState.style.display = 'block';
+  if (errorState) errorState.style.display = 'none';
+  if (filtersContainer) filtersContainer.style.display = 'none';
+  if (animeGrid) animeGrid.style.display = 'none';
+  if (emptyState) emptyState.style.display = 'none';
 }
 
 /**
  * 显示错误状态
  */
 function showErrorState() {
-  document.getElementById('loadingState').style.display = 'none';
-  document.getElementById('errorState').style.display = 'block';
-  document.getElementById('filtersContainer').style.display = 'none';
-  document.getElementById('animeGrid').style.display = 'none';
-  document.getElementById('emptyState').style.display = 'none';
+  const loadingState = document.getElementById('loadingState');
+  const errorState = document.getElementById('errorState');
+  const filtersContainer = document.getElementById('filtersContainer');
+  const animeGrid = document.getElementById('animeGrid');
+  const emptyState = document.getElementById('emptyState');
+  
+  console.log('showErrorState - 元素检查:', {
+    loadingState: !!loadingState,
+    errorState: !!errorState,
+    filtersContainer: !!filtersContainer,
+    animeGrid: !!animeGrid,
+    emptyState: !!emptyState
+  });
+  
+  if (loadingState) loadingState.style.display = 'none';
+  if (errorState) errorState.style.display = 'block';
+  if (filtersContainer) filtersContainer.style.display = 'none';
+  if (animeGrid) animeGrid.style.display = 'none';
+  if (emptyState) emptyState.style.display = 'none';
 }
 
 /**
  * 显示内容
  */
 function showContent() {
-  document.getElementById('loadingState').style.display = 'none';
-  document.getElementById('errorState').style.display = 'none';
-  document.getElementById('filtersContainer').style.display = 'block';
-  document.getElementById('animeGrid').style.display = 'block';
-  document.getElementById('emptyState').style.display = 'none';
+  const loadingState = document.getElementById('loadingState');
+  const errorState = document.getElementById('errorState');
+  const filtersContainer = document.getElementById('filtersContainer');
+  const animeGrid = document.getElementById('animeGrid');
+  const emptyState = document.getElementById('emptyState');
+  
+  if (loadingState) loadingState.style.display = 'none';
+  if (errorState) errorState.style.display = 'none';
+  if (filtersContainer) filtersContainer.style.display = 'block';
+  if (animeGrid) animeGrid.style.display = 'block';
+  if (emptyState) emptyState.style.display = 'none';
 }
 
 /**
  * 显示空状态
  */
 function showEmptyState() {
-  document.getElementById('loadingState').style.display = 'none';
-  document.getElementById('errorState').style.display = 'none';
-  document.getElementById('filtersContainer').style.display = 'block';
-  document.getElementById('animeGrid').style.display = 'none';
-  document.getElementById('emptyState').style.display = 'block';
+  const loadingState = document.getElementById('loadingState');
+  const errorState = document.getElementById('errorState');
+  const filtersContainer = document.getElementById('filtersContainer');
+  const animeGrid = document.getElementById('animeGrid');
+  const emptyState = document.getElementById('emptyState');
+  
+  if (loadingState) loadingState.style.display = 'none';
+  if (errorState) errorState.style.display = 'none';
+  if (filtersContainer) filtersContainer.style.display = 'block';
+  if (animeGrid) animeGrid.style.display = 'none';
+  if (emptyState) emptyState.style.display = 'block';
 }
 
 /**
@@ -299,6 +364,13 @@ function showEmptyState() {
  */
 function renderAnimes(animes) {
   const grid = document.getElementById('animeGrid');
+  
+  console.log('renderAnimes - animeGrid元素:', !!grid);
+  
+  if (!grid) {
+    console.error('animeGrid元素未找到');
+    return;
+  }
   
   if (animes.length === 0) {
     showEmptyState();
@@ -375,14 +447,116 @@ function goToDetail(animeId) {
  * 设置事件监听器
  */
 function setupEventListeners() {
+  console.log('=== 开始设置事件监听器 ===');
+  
   // 筛选器事件
-  document.getElementById('genreFilter').addEventListener('change', applyFilters);
-  document.getElementById('statusFilter').addEventListener('change', applyFilters);
-  document.getElementById('ratingFilter').addEventListener('change', applyFilters);
+  const genreFilter = document.getElementById('genreFilter');
+  const statusFilter = document.getElementById('statusFilter');
+  const ratingFilter = document.getElementById('ratingFilter');
+  
+  console.log('筛选器元素检查:', {
+    genreFilter: !!genreFilter,
+    statusFilter: !!statusFilter,
+    ratingFilter: !!ratingFilter
+  });
+  
+  if (genreFilter) genreFilter.addEventListener('change', applyFilters);
+  if (statusFilter) statusFilter.addEventListener('change', applyFilters);
+  if (ratingFilter) ratingFilter.addEventListener('change', applyFilters);
   
   // 搜索事件
   const searchInput = document.getElementById('searchInput');
-  searchInput.addEventListener('input', debounce(handleSearch, 300));
+  console.log('搜索输入框元素:', !!searchInput);
+  
+  if (searchInput) {
+    searchInput.addEventListener('input', debounce(handleSearch, 300));
+  }
+  
+  // AI助手按钮事件
+  console.log('正在查找AI助手按钮...');
+  const aiAssistantFab = document.getElementById('aiAssistantFab');
+  console.log('AI助手按钮元素:', aiAssistantFab);
+  console.log('AI助手按钮详细信息:', {
+    element: aiAssistantFab,
+    tagName: aiAssistantFab?.tagName,
+    id: aiAssistantFab?.id,
+    className: aiAssistantFab?.className,
+    style: aiAssistantFab?.style?.display
+  });
+  
+  if (aiAssistantFab) {
+    console.log('找到AI助手按钮，正在绑定事件...');
+    
+    // 添加多种事件绑定方式
+    aiAssistantFab.addEventListener('click', function(e) {
+      console.log('AI助手按钮被点击 (addEventListener)');
+      e.preventDefault();
+      e.stopPropagation();
+      openAIAssistant();
+    });
+    
+    // 备用绑定方式
+    aiAssistantFab.onclick = function(e) {
+      console.log('AI助手按钮被点击 (onclick)');
+      e.preventDefault();
+      e.stopPropagation();
+      openAIAssistant();
+    };
+    
+    console.log('AI助手按钮事件绑定完成');
+    
+    // 测试按钮是否可点击
+    setTimeout(() => {
+      console.log('延迟检查AI按钮状态...');
+      const button = document.getElementById('aiAssistantFab');
+      console.log('延迟检查结果:', {
+        exists: !!button,
+        visible: button?.offsetParent !== null,
+        display: button?.style?.display,
+        computedStyle: button ? window.getComputedStyle(button).display : 'N/A'
+      });
+    }, 1000);
+    
+  } else {
+    console.warn('AI助手按钮未找到');
+    
+    // 延迟重试查找按钮
+    setTimeout(() => {
+      console.log('延迟重试查找AI助手按钮...');
+      const retryButton = document.getElementById('aiAssistantFab');
+      if (retryButton) {
+        console.log('延迟重试成功找到AI助手按钮，重新绑定事件...');
+        retryButton.addEventListener('click', function(e) {
+          console.log('AI助手按钮被点击 (延迟绑定)');
+          e.preventDefault();
+          e.stopPropagation();
+          openAIAssistant();
+        });
+      } else {
+        console.error('延迟重试仍未找到AI助手按钮');
+      }
+    }, 2000);
+  }
+  
+  console.log('=== 事件监听器设置完成 ===');
+  
+  // 添加全局点击事件监听器用于调试
+  document.addEventListener('click', function(e) {
+    console.log('全局点击事件:', {
+      target: e.target,
+      tagName: e.target.tagName,
+      id: e.target.id,
+      className: e.target.className
+    });
+    
+    // 检查是否点击了AI助手按钮
+    if (e.target.id === 'aiAssistantFab' || e.target.closest('#aiAssistantFab')) {
+      console.log('检测到AI助手按钮点击！');
+      e.preventDefault();
+      e.stopPropagation();
+      openAIAssistant();
+    }
+  });
 }
 
 /**
@@ -456,6 +630,309 @@ function debounce(func, wait) {
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
   };
+}
+
+/**
+ * AI助手相关功能
+ */
+let aiDialog = null;
+
+/**
+ * 初始化AI助手
+ */
+async function initAIAssistant() {
+  console.log('开始初始化AI助手');
+  try {
+    // 创建简化版AI对话框
+    aiDialog = {
+      isOpen: false,
+      
+      open(context) {
+        console.log('AI对话框open方法被调用，context:', context);
+        if (this.isOpen) {
+          console.log('对话框已经打开，忽略重复调用');
+          return;
+        }
+        
+        this.createDialog();
+        this.setContext(context);
+        this.isOpen = true;
+        console.log('AI对话框已打开');
+      },
+      
+      close() {
+        console.log('AI对话框close方法被调用');
+        const dialog = document.getElementById('ai-dialog');
+        const overlay = document.getElementById('ai-dialog-overlay');
+        
+        if (dialog) {
+          console.log('移除AI对话框元素');
+          dialog.remove();
+        }
+        
+        if (overlay) {
+          console.log('移除AI对话框蒙层');
+          overlay.remove();
+        }
+        
+        this.isOpen = false;
+        console.log('AI对话框已关闭');
+      },
+      
+      createDialog() {
+        // 移除已存在的对话框
+        const existingDialog = document.getElementById('ai-dialog');
+        if (existingDialog) {
+          existingDialog.remove();
+        }
+        
+        // 创建对话框HTML
+        const dialogHTML = `
+          <div id="ai-dialog" style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            max-width: 90vw;
+            height: 500px;
+            max-height: 80vh;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          ">
+            <div style="
+              padding: 20px;
+              border-bottom: 1px solid #eee;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+              border-radius: 12px 12px 0 0;
+            ">
+              <h3 style="margin: 0; font-size: 18px;">🤖 AI助手</h3>
+              <button id="ai-dialog-close" style="
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+                padding: 0;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: background-color 0.2s;
+              " onmouseover="this.style.backgroundColor='rgba(255,255,255,0.2)'" onmouseout="this.style.backgroundColor='transparent'">×</button>
+            </div>
+            <div style="
+              flex: 1;
+              padding: 20px;
+              overflow-y: auto;
+              display: flex;
+              flex-direction: column;
+            ">
+              <div id="ai-messages" style="
+                flex: 1;
+                margin-bottom: 15px;
+                padding: 15px;
+                background: #f8f9fa;
+                border-radius: 8px;
+                min-height: 200px;
+                overflow-y: auto;
+              ">
+                <div style="
+                  background: #e3f2fd;
+                  padding: 12px;
+                  border-radius: 8px;
+                  border-left: 4px solid #2196f3;
+                  margin-bottom: 10px;
+                ">
+                  <strong>🤖 AI助手：</strong>您好！我是动漫推荐助手，可以帮您：<br>
+                  • 根据您的喜好推荐动漫<br>
+                  • 解答动漫相关问题<br>
+                  • 分析动漫特点和评价<br><br>
+                  请告诉我您想了解什么？
+                </div>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <input type="text" id="ai-input" placeholder="输入您的问题..." style="
+                  flex: 1;
+                  padding: 12px;
+                  border: 2px solid #ddd;
+                  border-radius: 25px;
+                  outline: none;
+                  font-size: 14px;
+                  transition: border-color 0.2s;
+                " onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#ddd'">
+                <button id="ai-send" style="
+                  padding: 12px 20px;
+                  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                  color: white;
+                  border: none;
+                  border-radius: 25px;
+                  cursor: pointer;
+                  font-size: 14px;
+                  font-weight: 500;
+                  transition: transform 0.2s;
+                " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">发送</button>
+              </div>
+            </div>
+          </div>
+          <div id="ai-dialog-overlay" style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+          "></div>
+        `;
+        
+        document.body.insertAdjacentHTML('beforeend', dialogHTML);
+        
+        // 绑定事件
+        document.getElementById('ai-dialog-close').addEventListener('click', () => this.close());
+        document.getElementById('ai-dialog-overlay').addEventListener('click', () => this.close());
+        
+        const input = document.getElementById('ai-input');
+        const sendBtn = document.getElementById('ai-send');
+        
+        const sendMessage = () => {
+          const message = input.value.trim();
+          if (message) {
+            this.addMessage('user', message);
+            input.value = '';
+            
+            // 模拟AI回复
+            setTimeout(() => {
+              this.addMessage('ai', this.generateResponse(message));
+            }, 1000);
+          }
+        };
+        
+        sendBtn.addEventListener('click', sendMessage);
+        input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            sendMessage();
+          }
+        });
+        
+        // 聚焦输入框
+        setTimeout(() => input.focus(), 100);
+      },
+      
+      addMessage(type, content) {
+        const messagesContainer = document.getElementById('ai-messages');
+        const messageDiv = document.createElement('div');
+        
+        if (type === 'user') {
+          messageDiv.style.cssText = `
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            border-radius: 18px 18px 4px 18px;
+            margin: 8px 0 8px 50px;
+            max-width: 80%;
+            margin-left: auto;
+            text-align: right;
+          `;
+          messageDiv.innerHTML = `<strong>您：</strong>${content}`;
+        } else {
+          messageDiv.style.cssText = `
+            background: #e3f2fd;
+            padding: 12px;
+            border-radius: 18px 18px 18px 4px;
+            margin: 8px 50px 8px 0;
+            max-width: 80%;
+            border-left: 4px solid #2196f3;
+          `;
+          messageDiv.innerHTML = `<strong>🤖 AI助手：</strong>${content}`;
+        }
+        
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      },
+      
+      generateResponse(message) {
+        const responses = [
+          "根据您的问题，我推荐您可以尝试一些经典的动漫作品。",
+          "这是一个很好的问题！让我为您分析一下相关的动漫特点。",
+          "基于当前的动漫数据，我可以为您提供一些个性化的推荐。",
+          "感谢您的提问！这类动漫通常具有很高的观赏价值。",
+          "我理解您的需求，让我为您推荐一些符合您喜好的作品。"
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+      },
+      
+      setContext(context) {
+        this.context = context;
+      }
+    };
+    
+    console.log('AI助手对象创建成功:', aiDialog);
+    return true;
+  } catch (error) {
+    console.error('AI助手初始化失败:', error);
+    return false;
+  }
+}
+
+/**
+ * 打开AI助手对话框
+ */
+function openAIAssistant() {
+  console.log('openAIAssistant被调用');
+  console.log('aiDialog状态:', aiDialog);
+  
+  if (aiDialog) {
+    console.log('AI助手已初始化，正在打开对话框');
+    aiDialog.open({
+      page: 'anime',
+      type: 'animation',
+      currentData: filteredAnimes,
+      totalData: allAnimes
+    });
+  } else {
+    console.warn('AI助手未初始化，正在尝试初始化...');
+    initAIAssistant().then((success) => {
+      console.log('初始化结果:', success);
+      console.log('初始化后aiDialog状态:', aiDialog);
+      if (aiDialog && success) {
+        console.log('初始化成功，正在打开对话框');
+        aiDialog.open({
+          page: 'anime',
+          type: 'animation',
+          currentData: filteredAnimes,
+          totalData: allAnimes
+        });
+      } else {
+        console.error('AI助手初始化失败，无法打开对话框');
+        alert('AI助手暂时不可用，请刷新页面重试');
+      }
+    }).catch(error => {
+      console.error('初始化Promise被拒绝:', error);
+      alert('AI助手初始化失败，请刷新页面重试');
+    });
+  }
+}
+
+// 页面加载完成后初始化AI助手
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', function() {
+    // 延迟初始化AI助手，避免阻塞页面加载
+    setTimeout(() => {
+      initAIAssistant();
+    }, 1000);
+  });
 }
 
 // 将loadAnimes函数暴露到全局作用域，供重新加载按钮使用
@@ -785,6 +1262,79 @@ if (typeof window !== 'undefined') {
   
   .anime-cover {
     height: 280px;
+  }
+}
+
+/* AI助手浮动按钮样式 */
+.ai-assistant-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.ai-assistant-fab:hover {
+  width: 140px;
+  border-radius: 30px;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+}
+
+.ai-fab-icon {
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.ai-fab-text {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 8px;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.ai-assistant-fab:hover .ai-fab-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.ai-assistant-fab:hover .ai-fab-icon {
+  transform: scale(0.9);
+}
+
+/* 响应式设计 - AI助手按钮 */
+@media (max-width: 768px) {
+  .ai-assistant-fab {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .ai-assistant-fab:hover {
+    width: 120px;
+  }
+  
+  .ai-fab-icon {
+    font-size: 20px;
+  }
+  
+  .ai-fab-text {
+    font-size: 12px;
   }
 }
 </style>

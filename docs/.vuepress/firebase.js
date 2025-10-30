@@ -1,6 +1,6 @@
 // Firebase配置文件
 import { initializeApp } from 'firebase/app';
-import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 import { getAnalytics } from 'firebase/analytics';
 import { firebaseConfig, firebaseServices } from './config/firebase-config.js';
 

@@ -62,6 +62,12 @@
   <div id="manga-grid" class="manga-grid" style="display: none;">
     <!-- 漫画卡片将通过JavaScript动态生成 -->
   </div>
+
+  <!-- AI助手浮动按钮 -->
+  <div class="ai-assistant-fab" id="aiAssistantFab" title="AI漫画助手">
+    <span class="ai-fab-icon">🤖</span>
+    <span class="ai-fab-text">AI助手</span>
+  </div>
 </div>
 
 <div class="manga-grid">
@@ -568,6 +574,79 @@
     height: 280px;
   }
 }
+
+/* AI助手浮动按钮样式 */
+.ai-assistant-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.ai-assistant-fab:hover {
+  width: 140px;
+  border-radius: 30px;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+}
+
+.ai-fab-icon {
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.ai-fab-text {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 8px;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.ai-assistant-fab:hover .ai-fab-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.ai-assistant-fab:hover .ai-fab-icon {
+  transform: scale(0.9);
+}
+
+/* 响应式设计 - AI助手按钮 */
+@media (max-width: 768px) {
+  .ai-assistant-fab {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .ai-assistant-fab:hover {
+    width: 120px;
+  }
+  
+  .ai-fab-icon {
+    font-size: 20px;
+  }
+  
+  .ai-fab-text {
+    font-size: 12px;
+  }
+}
 </style>
 
 <script>
@@ -805,6 +884,12 @@ function setupEventListeners() {
   // 搜索事件（使用防抖）
   const searchInput = document.getElementById('search-input');
   searchInput.addEventListener('input', debounce(applyFilters, 300));
+  
+  // AI助手按钮事件
+  const aiAssistantFab = document.getElementById('aiAssistantFab');
+  if (aiAssistantFab) {
+    aiAssistantFab.addEventListener('click', openAIAssistant);
+  }
 }
 
 // 应用筛选器
@@ -862,5 +947,54 @@ function goToMangaDetail(mangaId) {
 // 全局函数，供重新加载按钮调用
 if (typeof window !== 'undefined') {
   window.loadMangaData = loadMangaData;
+}
+
+// AI助手相关功能
+let aiDialog = null;
+
+async function openAIAssistant() {
+  try {
+    if (!aiDialog) {
+      // 动态导入AI对话框组件
+      const { AIDialog } = await import('/.vuepress/components/AIDialog.js');
+      aiDialog = new AIDialog();
+      
+      // 设置漫画页面上下文
+      aiDialog.setContext('manga', {
+        currentPage: 'manga',
+        totalMangas: staticMangaData.length,
+        availableGenres: ['动作', '冒险', '喜剧', '剧情', '奇幻', '恐怖', '浪漫', '科幻', '运动', '超自然', '惊悚'],
+        availableStatuses: ['reading', 'completed', 'on-hold', 'dropped', 'plan-to-read']
+      });
+    }
+    
+    // 获取当前漫画数据并打开对话框
+    const currentMangas = getCurrentMangaData();
+    aiDialog.open(currentMangas, staticMangaData.length);
+  } catch (error) {
+    console.error('打开AI助手失败:', error);
+    alert('AI助手暂时不可用，请稍后再试。');
+  }
+}
+
+function getCurrentMangaData() {
+  // 获取当前显示的漫画数据
+  const mangaCards = document.querySelectorAll('.manga-card:not([style*="display: none"])');
+  return Array.from(mangaCards).map(card => ({
+    title: card.querySelector('.manga-title')?.textContent || '',
+    genre: card.dataset.genre || '',
+    status: card.dataset.status || '',
+    rating: card.dataset.rating || ''
+  }));
+}
+
+// 延迟初始化AI助手，确保DOM完全加载
+if (typeof window !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      // 预加载AI助手组件（可选）
+      // 这样可以减少首次点击时的加载时间
+    }, 2000);
+  });
 }
 </script>

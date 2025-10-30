@@ -5,10 +5,14 @@ import {
   doc, 
   getDocs, 
   getDoc, 
+  addDoc,
+  updateDoc,
+  deleteDoc,
   query, 
   where, 
   orderBy, 
-  limit 
+  limit,
+  serverTimestamp 
 } from 'firebase/firestore';
 
 /**
@@ -274,6 +278,339 @@ class AnimeService {
     }
   }
 }
+
+  /**
+   * 添加新动画
+   * @param {Object} animeData - 动画数据
+   * @returns {Promise<Object>} 添加结果
+   */
+  async addAnime(animeData) {
+    try {
+      // 验证必需字段
+      if (!animeData.title) {
+        throw new Error('动画标题不能为空');
+      }
+
+      // 设置默认值和时间戳
+      const newAnime = {
+        title: animeData.title,
+        titleEn: animeData.titleEn || '',
+        description: animeData.description || '',
+        genres: animeData.genres || [],
+        rating: parseFloat(animeData.rating) || 0,
+        status: animeData.status || 'planning', // planning, watching, completed, dropped, on_hold
+        episodes: parseInt(animeData.episodes) || 0,
+        watchedEpisodes: parseInt(animeData.watchedEpisodes) || 0,
+        year: parseInt(animeData.year) || new Date().getFullYear(),
+        studio: animeData.studio || '',
+        image: animeData.image || '',
+        tags: animeData.tags || [],
+        notes: animeData.notes || '',
+        startDate: animeData.startDate || null,
+        endDate: animeData.endDate || null,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      };
+
+      const docRef = await addDoc(this.animesCollection, newAnime);
+      
+      return {
+        success: true,
+        id: docRef.id,
+        data: newAnime,
+        message: `成功添加动画：${newAnime.title}`
+      };
+    } catch (error) {
+      console.error('添加动画失败:', error);
+      return {
+        success: false,
+        error: error.message,
+        message: '添加动画失败'
+      };
+    }
+  }
+
+  /**
+   * 添加新漫画
+   * @param {Object} mangaData - 漫画数据
+   * @returns {Promise<Object>} 添加结果
+   */
+  async addManga(mangaData) {
+    try {
+      // 验证必需字段
+      if (!mangaData.title) {
+        throw new Error('漫画标题不能为空');
+      }
+
+      // 设置默认值和时间戳
+      const newManga = {
+        title: mangaData.title,
+        titleEn: mangaData.titleEn || '',
+        description: mangaData.description || '',
+        genres: mangaData.genres || [],
+        rating: parseFloat(mangaData.rating) || 0,
+        status: mangaData.status || 'planning', // planning, reading, completed, dropped, on_hold
+        chapters: parseInt(mangaData.chapters) || 0,
+        readChapters: parseInt(mangaData.readChapters) || 0,
+        volumes: parseInt(mangaData.volumes) || 0,
+        readVolumes: parseInt(mangaData.readVolumes) || 0,
+        year: parseInt(mangaData.year) || new Date().getFullYear(),
+        author: mangaData.author || '',
+        image: mangaData.image || '',
+        tags: mangaData.tags || [],
+        notes: mangaData.notes || '',
+        startDate: mangaData.startDate || null,
+        endDate: mangaData.endDate || null,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      };
+
+      const docRef = await addDoc(this.mangasCollection, newManga);
+      
+      return {
+        success: true,
+        id: docRef.id,
+        data: newManga,
+        message: `成功添加漫画：${newManga.title}`
+      };
+    } catch (error) {
+      console.error('添加漫画失败:', error);
+      return {
+        success: false,
+        error: error.message,
+        message: '添加漫画失败'
+      };
+    }
+  }
+
+  /**
+   * 更新动画
+   * @param {string} id - 动画ID
+   * @param {Object} updateData - 更新数据
+   * @returns {Promise<Object>} 更新结果
+   */
+  async updateAnime(id, updateData) {
+    try {
+      const docRef = doc(this.animesCollection, id);
+      
+      // 检查文档是否存在
+      const docSnap = await getDoc(docRef);
+      if (!docSnap.exists()) {
+        throw new Error('动画不存在');
+      }
+
+      // 准备更新数据
+      const updates = {
+        ...updateData,
+        updatedAt: serverTimestamp()
+      };
+
+      // 处理数值类型
+      if (updates.rating) updates.rating = parseFloat(updates.rating);
+      if (updates.episodes) updates.episodes = parseInt(updates.episodes);
+      if (updates.watchedEpisodes) updates.watchedEpisodes = parseInt(updates.watchedEpisodes);
+      if (updates.year) updates.year = parseInt(updates.year);
+
+      await updateDoc(docRef, updates);
+      
+      return {
+        success: true,
+        id: id,
+        data: updates,
+        message: `成功更新动画：${docSnap.data().title}`
+      };
+    } catch (error) {
+      console.error('更新动画失败:', error);
+      return {
+        success: false,
+        error: error.message,
+        message: '更新动画失败'
+      };
+    }
+  }
+
+  /**
+   * 更新漫画
+   * @param {string} id - 漫画ID
+   * @param {Object} updateData - 更新数据
+   * @returns {Promise<Object>} 更新结果
+   */
+  async updateManga(id, updateData) {
+    try {
+      const docRef = doc(this.mangasCollection, id);
+      
+      // 检查文档是否存在
+      const docSnap = await getDoc(docRef);
+      if (!docSnap.exists()) {
+        throw new Error('漫画不存在');
+      }
+
+      // 准备更新数据
+      const updates = {
+        ...updateData,
+        updatedAt: serverTimestamp()
+      };
+
+      // 处理数值类型
+      if (updates.rating) updates.rating = parseFloat(updates.rating);
+      if (updates.chapters) updates.chapters = parseInt(updates.chapters);
+      if (updates.readChapters) updates.readChapters = parseInt(updates.readChapters);
+      if (updates.volumes) updates.volumes = parseInt(updates.volumes);
+      if (updates.readVolumes) updates.readVolumes = parseInt(updates.readVolumes);
+      if (updates.year) updates.year = parseInt(updates.year);
+
+      await updateDoc(docRef, updates);
+      
+      return {
+        success: true,
+        id: id,
+        data: updates,
+        message: `成功更新漫画：${docSnap.data().title}`
+      };
+    } catch (error) {
+      console.error('更新漫画失败:', error);
+      return {
+        success: false,
+        error: error.message,
+        message: '更新漫画失败'
+      };
+    }
+  }
+
+  /**
+   * 删除动画
+   * @param {string} id - 动画ID
+   * @returns {Promise<Object>} 删除结果
+   */
+  async deleteAnime(id) {
+    try {
+      const docRef = doc(this.animesCollection, id);
+      
+      // 检查文档是否存在
+      const docSnap = await getDoc(docRef);
+      if (!docSnap.exists()) {
+        throw new Error('动画不存在');
+      }
+
+      const title = docSnap.data().title;
+      await deleteDoc(docRef);
+      
+      return {
+        success: true,
+        id: id,
+        message: `成功删除动画：${title}`
+      };
+    } catch (error) {
+      console.error('删除动画失败:', error);
+      return {
+        success: false,
+        error: error.message,
+        message: '删除动画失败'
+      };
+    }
+  }
+
+  /**
+   * 删除漫画
+   * @param {string} id - 漫画ID
+   * @returns {Promise<Object>} 删除结果
+   */
+  async deleteManga(id) {
+    try {
+      const docRef = doc(this.mangasCollection, id);
+      
+      // 检查文档是否存在
+      const docSnap = await getDoc(docRef);
+      if (!docSnap.exists()) {
+        throw new Error('漫画不存在');
+      }
+
+      const title = docSnap.data().title;
+      await deleteDoc(docRef);
+      
+      return {
+        success: true,
+        id: id,
+        message: `成功删除漫画：${title}`
+      };
+    } catch (error) {
+      console.error('删除漫画失败:', error);
+      return {
+        success: false,
+        error: error.message,
+        message: '删除漫画失败'
+      };
+    }
+  }
+
+  /**
+   * 批量更新动画进度
+   * @param {Array} updates - 更新数组，每个元素包含 {id, watchedEpisodes, status}
+   * @returns {Promise<Object>} 批量更新结果
+   */
+  async batchUpdateAnimeProgress(updates) {
+    try {
+      const results = [];
+      
+      for (const update of updates) {
+        const result = await this.updateAnime(update.id, {
+          watchedEpisodes: update.watchedEpisodes,
+          status: update.status
+        });
+        results.push(result);
+      }
+      
+      const successCount = results.filter(r => r.success).length;
+      
+      return {
+        success: true,
+        results: results,
+        message: `成功更新 ${successCount}/${updates.length} 个动画进度`
+      };
+    } catch (error) {
+      console.error('批量更新动画进度失败:', error);
+      return {
+        success: false,
+        error: error.message,
+        message: '批量更新动画进度失败'
+      };
+    }
+  }
+
+  /**
+   * 批量更新漫画进度
+   * @param {Array} updates - 更新数组，每个元素包含 {id, readChapters, readVolumes, status}
+   * @returns {Promise<Object>} 批量更新结果
+   */
+  async batchUpdateMangaProgress(updates) {
+    try {
+      const results = [];
+      
+      for (const update of updates) {
+        const result = await this.updateManga(update.id, {
+          readChapters: update.readChapters,
+          readVolumes: update.readVolumes,
+          status: update.status
+        });
+        results.push(result);
+      }
+      
+      const successCount = results.filter(r => r.success).length;
+      
+      return {
+        success: true,
+        results: results,
+        message: `成功更新 ${successCount}/${updates.length} 个漫画进度`
+      };
+    } catch (error) {
+      console.error('批量更新漫画进度失败:', error);
+      return {
+        success: false,
+        error: error.message,
+        message: '批量更新漫画进度失败'
+      };
+    }
+  }
 
 // 创建单例实例
 const animeService = new AnimeService();
