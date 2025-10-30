@@ -1,0 +1,193 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 动画集合规则
+    match /animes/{animeId} {
+      // 允许所有用户读取动画数据
+      allow read: if true;
+      
+      // 只允许管理员写入动画数据
+      allow write: if isAdmin();
+      
+      // 允许认证用户更新评分和统计信息
+      allow update: if request.auth != null 
+        && onlyUpdatingFields(['ratings', 'statistics', 'metadata.updatedAt']);
+    }
+    
+    // 漫画集合规则
+    match /mangas/{mangaId} {
+      // 允许所有用户读取漫画数据
+      allow read: if true;
+      
+      // 只允许管理员写入漫画数据
+      allow write: if isAdmin();
+      
+      // 允许认证用户更新评分和统计信息
+      allow update: if request.auth != null 
+        && onlyUpdatingFields(['ratings', 'statistics', 'metadata.updatedAt']);
+    }
+    
+    // 用户集合规则
+    match /users/{userId} {
+      // 用户只能读取自己的数据，管理员可以读取所有用户数据
+      allow read: if request.auth != null 
+        && (request.auth.uid == userId || isAdmin());
+      
+      // 用户只能创建和更新自己的数据
+      allow create: if request.auth != null 
+        && request.auth.uid == userId
+        && validateUserData();
+      
+      allow update: if request.auth != null 
+        && request.auth.uid == userId
+        && validateUserUpdate();
+      
+      // 只有管理员可以删除用户
+      allow delete: if isAdmin();
+    }
+    
+    // 评论集合规则
+    match /reviews/{reviewId} {
+      // 允许所有用户读取评论
+      allow read: if true;
+      
+      // 认证用户可以创建评论
+      allow create: if request.auth != null 
+        && validateReviewData()
+        && request.resource.data.userId == request.auth.uid;
+      
+      // 用户只能更新自己的评论，管理员可以更新所有评论
+      allow update: if request.auth != null 
+        && (resource.data.userId == request.auth.uid || isAdmin())
+        && validateReviewUpdate();
+      
+      // 用户只能删除自己的评论，管理员可以删除所有评论
+      allow delete: if request.auth != null 
+        && (resource.data.userId == request.auth.uid || isAdmin());
+    }
+    
+    // 列表集合规则
+    match /lists/{listId} {
+      // 公开列表所有人可读，私有列表只有所有者和管理员可读
+      allow read: if resource.data.isPublic == true 
+        || (request.auth != null 
+            && (resource.data.userId == request.auth.uid || isAdmin()));
+      
+      // 认证用户可以创建自己的列表
+      allow create: if request.auth != null 
+        && validateListData()
+        && request.resource.data.userId == request.auth.uid;
+      
+      // 用户只能更新自己的列表
+      allow update: if request.auth != null 
+        && resource.data.userId == request.auth.uid
+        && validateListUpdate();
+      
+      // 用户只能删除自己的列表，管理员可以删除所有列表
+      allow delete: if request.auth != null 
+        && (resource.data.userId == request.auth.uid || isAdmin());
+    }
+    
+    // 管理员集合规则（仅管理员可访问）
+    match /admin/{document=**} {
+      allow read, write: if isAdmin();
+    }
+    
+    // 系统配置规则（只读）
+    match /config/{configId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // 统计数据规则（只读）
+    match /statistics/{statId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // 辅助函数
+    
+    // 检查是否为管理员
+    function isAdmin() {
+      return request.auth != null 
+        && request.auth.token.admin == true;
+    }
+    
+    // 检查是否只更新指定字段
+    function onlyUpdatingFields(allowedFields) {
+      return request.resource.data.diff(resource.data).affectedKeys()
+        .hasOnly(allowedFields);
+    }
+    
+    // 验证用户数据
+    function validateUserData() {
+      let data = request.resource.data;
+      return data.keys().hasAll(['profile', 'preferences', 'statistics', 'metadata'])
+        && data.profile.keys().hasAll(['username', 'email'])
+        && data.profile.username is string
+        && data.profile.username.size() >= 3
+        && data.profile.username.size() <= 30
+        && data.profile.email is string
+        && data.profile.email.matches('.*@.*\\..*')
+        && data.metadata.createdAt == request.time
+        && data.metadata.updatedAt == request.time;
+    }
+    
+    // 验证用户更新
+    function validateUserUpdate() {
+      let data = request.resource.data;
+      return data.metadata.updatedAt == request.time
+        && data.metadata.createdAt == resource.data.metadata.createdAt;
+    }
+    
+    // 验证评论数据
+    function validateReviewData() {
+      let data = request.resource.data;
+      return data.keys().hasAll(['userId', 'itemType', 'itemId', 'rating', 'content', 'createdAt'])
+        && data.userId is string
+        && data.itemType in ['anime', 'manga']
+        && data.itemId is string
+        && data.rating is number
+        && data.rating >= 1
+        && data.rating <= 10
+        && data.content is string
+        && data.content.size() <= 2000
+        && data.createdAt == request.time;
+    }
+    
+    // 验证评论更新
+    function validateReviewUpdate() {
+      let data = request.resource.data;
+      return data.updatedAt == request.time
+        && data.createdAt == resource.data.createdAt
+        && data.userId == resource.data.userId
+        && data.itemType == resource.data.itemType
+        && data.itemId == resource.data.itemId;
+    }
+    
+    // 验证列表数据
+    function validateListData() {
+      let data = request.resource.data;
+      return data.keys().hasAll(['userId', 'name', 'type', 'items', 'isPublic', 'createdAt', 'updatedAt'])
+        && data.userId is string
+        && data.name is string
+        && data.name.size() >= 1
+        && data.name.size() <= 100
+        && data.type in ['anime', 'manga', 'mixed']
+        && data.items is list
+        && data.items.size() <= 1000
+        && data.isPublic is bool
+        && data.createdAt == request.time
+        && data.updatedAt == request.time;
+    }
+    
+    // 验证列表更新
+    function validateListUpdate() {
+      let data = request.resource.data;
+      return data.updatedAt == request.time
+        && data.createdAt == resource.data.createdAt
+        && data.userId == resource.data.userId;
+    }
+  }
+}

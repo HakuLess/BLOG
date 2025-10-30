@@ -1,4 +1,4 @@
-import comp from "D:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/AtCoder/index.html.vue"
+import comp from "E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/AtCoder/index.html.vue"
 const data = JSON.parse("{\"path\":\"/Contest/AtCoder/\",\"title\":\"\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"readingTime\":{\"minutes\":0.03,\"words\":8},\"filePathRelative\":\"Contest/AtCoder/README.md\"}")
 export { comp, data }
 

@@ -1,13 +1,13 @@
 <template><div><h1 id="马双飞" tabindex="-1"><a class="header-anchor" href="#马双飞"><span>马双飞</span></a></h1>
 <h2 id="android-开发工程师" tabindex="-1"><a class="header-anchor" href="#android-开发工程师"><span>Android 开发工程师</span></a></h2>
 <div class="contact-info">
-<p>📱 <strong>手机：</strong> 15246084078<br>
-📧 <strong>邮箱：</strong> <a href="mailto:hakuless@gmail.com" target="_blank" rel="noopener noreferrer">hakuless@gmail.com</a><br>
-🎂 <strong>出生年月：</strong> 1990.09<br>
-🔗 <strong>GitHub：</strong> <a href="https://github.com/HakuLess" target="_blank" rel="noopener noreferrer">github.com/HakuLess</a></p>
+<p><strong>手机：</strong> 15246084078<br>
+<strong>邮箱：</strong> <a href="mailto:hakuless@gmail.com" target="_blank" rel="noopener noreferrer">hakuless@gmail.com</a><br>
+<strong>出生年月：</strong> 1990.09<br>
+<strong>GitHub：</strong> <a href="https://github.com/HakuLess" target="_blank" rel="noopener noreferrer">github.com/HakuLess</a></p>
 </div>
 <hr>
-<h2 id="👨‍💻-个人简介" tabindex="-1"><a class="header-anchor" href="#👨‍💻-个人简介"><span>👨‍💻 个人简介</span></a></h2>
+<h2 id="个人简介" tabindex="-1"><a class="header-anchor" href="#个人简介"><span>个人简介</span></a></h2>
 <ul>
 <li><strong>9年+</strong> Android开发经验，参与过多个千万级用户产品开发</li>
 <li>熟练掌握基础算法，固定每周参加 <strong>LeetCode 周赛</strong></li>
@@ -16,7 +16,7 @@
 <li>乐于学习新知识，认可 <strong>AI</strong> 是未来的发展方向</li>
 </ul>
 <hr>
-<h2 id="🛠️-技能水平" tabindex="-1"><a class="header-anchor" href="#🛠️-技能水平"><span>🛠️ 技能水平</span></a></h2>
+<h2 id="技能水平" tabindex="-1"><a class="header-anchor" href="#技能水平"><span>技能水平</span></a></h2>
 <h3 id="核心技能" tabindex="-1"><a class="header-anchor" href="#核心技能"><span>核心技能</span></a></h3>
 <div class="hint-container tip">
 <p class="hint-container-title">Kotlin语言 ⭐⭐⭐⭐⭐</p>
@@ -73,7 +73,7 @@
 </tbody>
 </table>
 <hr>
-<h2 id="💼-工作经验" tabindex="-1"><a class="header-anchor" href="#💼-工作经验"><span>💼 工作经验</span></a></h2>
+<h2 id="工作经验" tabindex="-1"><a class="header-anchor" href="#工作经验"><span>工作经验</span></a></h2>
 <h3 id="传音控股" tabindex="-1"><a class="header-anchor" href="#传音控股"><span>传音控股</span></a></h3>
 <p><strong>Android 开发</strong> | 2025.08 ~ 至今 | 上海</p>
 <h3 id="oppo【上海瑾盛通信科技有限公司】" tabindex="-1"><a class="header-anchor" href="#oppo【上海瑾盛通信科技有限公司】"><span>OPPO【上海瑾盛通信科技有限公司】</span></a></h3>
@@ -81,7 +81,7 @@
 <hr>
 <h3 id="美团点评【互诚信息技术-上海-有限公司】" tabindex="-1"><a class="header-anchor" href="#美团点评【互诚信息技术-上海-有限公司】"><span>美团点评【互诚信息技术（上海）有限公司】</span></a></h3>
 <p><strong>Android 开发</strong> | 2016.05 ~ 2025.04 | 上海</p>
-<h4 id="📱-点评客户端团队-2019-12-2025-04" tabindex="-1"><a class="header-anchor" href="#📱-点评客户端团队-2019-12-2025-04"><span>📱 点评客户端团队 <code v-pre>2019.12 ~ 2025.04</code></span></a></h4>
+<h4 id="点评客户端团队-2019-12-2025-04" tabindex="-1"><a class="header-anchor" href="#点评客户端团队-2019-12-2025-04"><span>点评客户端团队 <code v-pre>2019.12 ~ 2025.04</code></span></a></h4>
 <ul>
 <li>
 <p><strong>核心业务开发</strong></p>
@@ -98,42 +98,42 @@
 </ul>
 </li>
 </ul>
-<h4 id="💻-点评前端团队-2019-04-2019-11" tabindex="-1"><a class="header-anchor" href="#💻-点评前端团队-2019-04-2019-11"><span>💻 点评前端团队 <code v-pre>2019.04 ~ 2019.11</code></span></a></h4>
+<h4 id="点评前端团队-2019-04-2019-11" tabindex="-1"><a class="header-anchor" href="#点评前端团队-2019-04-2019-11"><span>点评前端团队 <code v-pre>2019.04 ~ 2019.11</code></span></a></h4>
 <ul>
 <li>Vue 前端页面开发</li>
 <li>NodeJS 承载 Pigeon 服务提供前端接口</li>
 </ul>
-<h4 id="🌍-美团点评境外团队-2016-05-2019-03" tabindex="-1"><a class="header-anchor" href="#🌍-美团点评境外团队-2016-05-2019-03"><span>🌍 美团点评境外团队 <code v-pre>2016.05 ~ 2019.03</code></span></a></h4>
+<h4 id="美团点评境外团队-2016-05-2019-03" tabindex="-1"><a class="header-anchor" href="#美团点评境外团队-2016-05-2019-03"><span>美团点评境外团队 <code v-pre>2016.05 ~ 2019.03</code></span></a></h4>
 <p>负责大众点评、美团两款 APP 中境外站相关页面开发</p>
 <ul>
 <li>提交订单页、类目列表页</li>
 <li>拍照翻译页、日期选择页等核心功能</li>
 </ul>
 <hr>
-<h3 id="🍰-廿一客食品有限公司【21cake】" tabindex="-1"><a class="header-anchor" href="#🍰-廿一客食品有限公司【21cake】"><span>🍰 廿一客食品有限公司【21cake】</span></a></h3>
+<h3 id="廿一客食品有限公司【21cake】" tabindex="-1"><a class="header-anchor" href="#廿一客食品有限公司【21cake】"><span>廿一客食品有限公司【21cake】</span></a></h3>
 <p><strong>Android 开发</strong> | 2015.12 ~ 2016.04 | 上海</p>
 <hr>
-<h3 id="🏢-上海楼口电子商务有限公司" tabindex="-1"><a class="header-anchor" href="#🏢-上海楼口电子商务有限公司"><span>🏢 上海楼口电子商务有限公司</span></a></h3>
+<h3 id="上海楼口电子商务有限公司" tabindex="-1"><a class="header-anchor" href="#上海楼口电子商务有限公司"><span>上海楼口电子商务有限公司</span></a></h3>
 <p><strong>Android 开发</strong> | 2015.06 ~ 2015.11 | 上海</p>
 <hr>
-<h3 id="🛢️-大庆油田信息技术公司" tabindex="-1"><a class="header-anchor" href="#🛢️-大庆油田信息技术公司"><span>🛢️ 大庆油田信息技术公司</span></a></h3>
+<h3 id="大庆油田信息技术公司" tabindex="-1"><a class="header-anchor" href="#大庆油田信息技术公司"><span>大庆油田信息技术公司</span></a></h3>
 <p><strong>软件开发</strong> | 2014.09 ~ 2015.05 | 大庆</p>
 <hr>
-<h2 id="🎓-教育经历" tabindex="-1"><a class="header-anchor" href="#🎓-教育经历"><span>🎓 教育经历</span></a></h2>
+<h2 id="教育经历" tabindex="-1"><a class="header-anchor" href="#教育经历"><span>教育经历</span></a></h2>
 <h3 id="哈尔滨工业大学-985-211" tabindex="-1"><a class="header-anchor" href="#哈尔滨工业大学-985-211"><span>哈尔滨工业大学 <code v-pre>985/211</code></span></a></h3>
 <ul>
 <li><strong>硕士</strong> | 软件工程 | 2012-2014</li>
 <li><strong>本科</strong> | 软件工程 | 2008-2012</li>
 </ul>
 <hr>
-<h2 id="🚀-核心项目经历" tabindex="-1"><a class="header-anchor" href="#🚀-核心项目经历"><span>🚀 核心项目经历</span></a></h2>
-<h3 id="📊-点评-app-启动优化" tabindex="-1"><a class="header-anchor" href="#📊-点评-app-启动优化"><span>📊 点评 APP 启动优化</span></a></h3>
+<h2 id="核心项目经历" tabindex="-1"><a class="header-anchor" href="#核心项目经历"><span>核心项目经历</span></a></h2>
+<h3 id="点评-app-启动优化" tabindex="-1"><a class="header-anchor" href="#点评-app-启动优化"><span>点评 APP 启动优化</span></a></h3>
 <p><strong>项目时间：</strong> 2024.06 ~ 2025.04</p>
 <div class="hint-container tip">
-<p class="hint-container-title">🎯 项目成果</p>
+<p class="hint-container-title">项目成果</p>
 <p>LVC TP90 线由 <strong>5.8s</strong> 优化至 <strong>3.5s</strong>，提升 <strong>39.7%</strong></p>
 </div>
-<p><strong>🔧 技术方案：</strong></p>
+<p>** 技术方案：**</p>
 <ul>
 <li>进行当前耗时分析，页面展示流程分为 4 个阶段
 <ol>
@@ -148,13 +148,13 @@
 <li>优化 Feed 模块加载速度</li>
 </ul>
 <hr>
-<h3 id="🏗️-点评首页框架改版" tabindex="-1"><a class="header-anchor" href="#🏗️-点评首页框架改版"><span>🏗️ 点评首页框架改版</span></a></h3>
+<h3 id="点评首页框架改版" tabindex="-1"><a class="header-anchor" href="#点评首页框架改版"><span>点评首页框架改版</span></a></h3>
 <p><strong>项目时间：</strong> 2023.09 ~ 2023.11</p>
 <div class="hint-container tip">
-<p class="hint-container-title">🎯 项目成果</p>
+<p class="hint-container-title">项目成果</p>
 <p>完成首页框架改版，根据接口数据 &amp; 实验字段展示多 TAB 首页</p>
 </div>
-<p><strong>🔧 技术亮点：</strong></p>
+<p>** 技术亮点：**</p>
 <ul>
 <li>滑动冲突处理：利用多态特性，根据当前选中 TAB 进行不同逻辑处理</li>
 <li>同时兼容皮肤、二楼等特殊 UI 逻辑</li>
@@ -162,14 +162,14 @@
 <li>增加双指缩放可动态改变 Feed 流列数功能</li>
 </ul>
 <hr>
-<h2 id="🏆-特色亮点" tabindex="-1"><a class="header-anchor" href="#🏆-特色亮点"><span>🏆 特色亮点</span></a></h2>
+<h2 id="特色亮点" tabindex="-1"><a class="header-anchor" href="#特色亮点"><span>特色亮点</span></a></h2>
 <div class="hint-container warning">
 <p class="hint-container-title">🎬 Google 合作项目</p>
 <p>参与点评与 Google 合作的 Kotlin 宣传视频拍摄<br>
 <strong>视频链接：</strong><a href="https://www.bilibili.com/video/BV1Tz4y1k7Lv" target="_blank" rel="noopener noreferrer">大众点评用 Kotlin 打造灵活稳定兼备的应用 | Android 开发者故事_哔哩哔哩_bilibili</a></p>
 </div>
 <div class="hint-container info">
-<p class="hint-container-title">💡 技术特长</p>
+<p class="hint-container-title">技术特长</p>
 <ul>
 <li><strong>算法竞赛</strong>：每周参加 LeetCode 周赛，保持技术敏锐度</li>
 <li><strong>开源贡献</strong>：GitHub 活跃用户，关注技术发展趋势</li>

@@ -1,4 +1,4 @@
-import comp from "D:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/LeetCode/BWC43.html.vue"
+import comp from "E:/WorkSpace/BLOG/docs/.vuepress/.temp/pages/Contest/LeetCode/BWC43.html.vue"
 const data = JSON.parse("{\"path\":\"/Contest/LeetCode/BWC43.html\",\"title\":\"第 43 场双周赛题解\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"readingTime\":{\"minutes\":2.8,\"words\":840},\"filePathRelative\":\"Contest/LeetCode/BWC43.md\"}")
 export { comp, data }
 

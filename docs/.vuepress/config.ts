@@ -20,11 +20,25 @@ export default defineUserConfig({
   },
 
   theme: hopeTheme({
-    // 启用ECharts支持
-    plugins: {
-      mdEnhance: {
-        echarts: true,
-      },
+    // 使用正确的markdown配置方式
+    markdown: {
+      // 启用图表支持
+      chartjs: true,
+      // 启用ECharts支持
+      echarts: true,
+      // 启用流程图
+      flowchart: true,
+      // 启用Mermaid图表
+      mermaid: true,
+      // 启用代码演示
+      demo: true,
+      // 启用标记
+      mark: true,
+      // 启用上下角标
+      sub: true,
+      sup: true,
+      // 启用任务列表
+      tasklist: true,
     },
 
     // 目录加密：为 /Life/Money/ 下所有页面设置访问口令
@@ -39,6 +53,14 @@ export default defineUserConfig({
     navbar: [
       { text: "Home", link: "/" },
       { text: "📋 简历", link: "/resume.html" },
+      {
+        text: "🎬 动漫",
+        children: [
+          { text: "📊 观看总结", link: "/Anime/" },
+          { text: "🎞️ 动画专区", link: "/Anime/animation/" },
+          { text: "📚 漫画专区", link: "/Anime/manga/" },
+        ],
+      },
       {
         text: "Contest",
         children: [
@@ -200,6 +222,41 @@ export default defineUserConfig({
             { text: "资产分析2022", link: "/Life/Money/资产分析2022.md" },
             { text: "资产分析2021", link: "/Life/Money/资产分析2021.md" },
             { text: "资产分析2020", link: "/Life/Money/资产分析2020.md" },
+          ],
+        },
+      ],
+      "/Anime/": [
+        {
+          text: "📊 观看总结",
+          collapsible: true,
+          children: [
+            { text: "总览", link: "/Anime/" },
+            { text: "年度统计", link: "/Anime/yearly-stats.md" },
+            { text: "个人偏好", link: "/Anime/preferences.md" },
+          ],
+        },
+      ],
+      "/Anime/animation/": [
+        {
+          text: "🎞️ 动画专区",
+          collapsible: true,
+          children: [
+            { text: "动画列表", link: "/Anime/animation/" },
+            { text: "正在追番", link: "/Anime/animation/watching.md" },
+            { text: "已完成", link: "/Anime/animation/completed.md" },
+            { text: "计划观看", link: "/Anime/animation/planned.md" },
+          ],
+        },
+      ],
+      "/Anime/manga/": [
+        {
+          text: "📚 漫画专区",
+          collapsible: true,
+          children: [
+            { text: "漫画列表", link: "/Anime/manga/" },
+            { text: "正在阅读", link: "/Anime/manga/reading.md" },
+            { text: "已完成", link: "/Anime/manga/completed.md" },
+            { text: "计划阅读", link: "/Anime/manga/planned.md" },
           ],
         },
       ],

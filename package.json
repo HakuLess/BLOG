@@ -20,6 +20,10 @@
   },
   "dependencies": {
     "@iktakahiro/markdown-it-katex": "^4.0.0",
+    "chart.js": "^4.5.1",
+    "firebase": "^12.4.0",
+    "flowchart.ts": "^3.0.1",
+    "mermaid": "^11.12.1",
     "yarn": "^1.22.22"
   }
 }

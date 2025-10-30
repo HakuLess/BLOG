@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase数据管理中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: #6c757d;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab.active {
+            background: white;
+            color: #495057;
+            border-bottom: 3px solid #4ECDC4;
+        }
+
+        .nav-tab:hover {
+            background: #e9ecef;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .config-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .config-section h3 {
+            color: #495057;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        input[type="text"], 
+        input[type="number"], 
+        select, 
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, 
+        select:focus, 
+        textarea:focus {
+            outline: none;
+            border-color: #4ECDC4;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #4ECDC4, #44A08D);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .log-area {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .data-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .data-card:hover {
+            border-color: #4ECDC4;
+            transform: translateY(-2px);
+        }
+
+        .data-card h4 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-connected {
+            background: #28a745;
+        }
+
+        .status-disconnected {
+            background: #dc3545;
+        }
+
+        .status-loading {
+            background: #ffc107;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #4ECDC4, #44A08D);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #4ECDC4;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .security-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            margin: 20px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .security-info h3 {
+            color: #495057;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .security-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #4ECDC4;
+        }
+
+        .security-section h4 {
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .security-section ul, .security-section ol {
+            margin-left: 20px;
+        }
+
+        .security-section li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #4ECDC4, #44A08D);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .modal-content {
+                margin: 10px;
+                padding: 20px;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 Firebase数据管理中心</h1>
+            <p>全功能的动漫数据库管理工具</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('config')">🔧 配置</button>
+            <button class="nav-tab" onclick="switchTab('migration')">🔄 数据迁移</button>
+            <button class="nav-tab" onclick="switchTab('management')">📊 数据管理</button>
+            <button class="nav-tab" onclick="switchTab('analytics')">📈 数据分析</button>
+            <button class="nav-tab" onclick="switchTab('tools')">🛠️ 工具</button>
+        </div>
+
+        <!-- 配置选项卡 -->
+        <div id="config" class="tab-content active">
+            <div class="config-section">
+                <h3>🔑 Firebase配置</h3>
+                <div class="alert alert-info">
+                    <strong>提示：</strong> 配置已预设为AnimeList项目，API密钥在客户端是公开的，安全性通过Firestore规则保证
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="apiKey">API Key</label>
+                        <input type="text" id="apiKey" value="AIzaSyCwJYHjVqzn2-GZ2y5_ZB6LQCVZry64qbI" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="authDomain">Auth Domain</label>
+                        <input type="text" id="authDomain" value="animalist-ad3f5.firebaseapp.com" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="projectId">Project ID</label>
+                        <input type="text" id="projectId" value="animalist-ad3f5" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="storageBucket">Storage Bucket</label>
+                        <input type="text" id="storageBucket" value="animalist-ad3f5.appspot.com" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="messagingSenderId">Messaging Sender ID</label>
+                        <input type="text" id="messagingSenderId" value="123456789" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="appId">App ID</label>
+                        <input type="text" id="appId" value="1:123456789:web:abcdef123456" readonly>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="testConnection()">
+                        <span>🔗</span> 测试连接
+                    </button>
+                    <button class="btn btn-secondary" onclick="saveConfig()">
+                        <span>💾</span> 保存配置
+                    </button>
+                    <button class="btn btn-success" onclick="showSecurityInfo()">
+                        <span>🛡️</span> 安全说明
+                    </button>
+                </div>
+                <div class="data-card">
+                    <h4>连接状态</h4>
+                    <p id="connectionStatus">
+                        <span class="status-indicator status-disconnected"></span>
+                        未连接
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据迁移选项卡 -->
+        <div id="migration" class="tab-content">
+            <div class="config-section">
+                <h3>🔄 数据迁移工具</h3>
+                <div class="alert alert-warning">
+                    <strong>注意：</strong> 数据迁移会修改现有数据结构，请先备份数据
+                </div>
+                
+                <div class="data-grid">
+                    <div class="data-card">
+                        <h4>📺 动画数据迁移</h4>
+                        <p>将现有动画数据升级到新结构</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="animeProgress"></div>
+                        </div>
+                        <button class="btn btn-primary" onclick="migrateAnimes()">开始迁移</button>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h4>📚 漫画数据迁移</h4>
+                        <p>将现有漫画数据升级到新结构</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="mangaProgress"></div>
+                        </div>
+                        <button class="btn btn-primary" onclick="migrateMangas()">开始迁移</button>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h4>🔄 完整迁移</h4>
+                        <p>执行所有数据的完整迁移</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="fullProgress"></div>
+                        </div>
+                        <button class="btn btn-success" onclick="migrateAll()">完整迁移</button>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h4>✅ 验证迁移</h4>
+                        <p>验证迁移结果的完整性</p>
+                        <button class="btn btn-secondary" onclick="validateMigration()">验证数据</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据管理选项卡 -->
+        <div id="management" class="tab-content">
+            <div class="config-section">
+                <h3>📊 数据管理</h3>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="animeCount">0</div>
+                        <div class="stat-label">动画数量</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="mangaCount">0</div>
+                        <div class="stat-label">漫画数量</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="userCount">0</div>
+                        <div class="stat-label">用户数量</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="reviewCount">0</div>
+                        <div class="stat-label">评论数量</div>
+                    </div>
+                </div>
+
+                <div class="data-grid">
+                    <div class="data-card">
+                        <h4>➕ 添加新数据</h4>
+                        <div class="button-group">
+                            <button class="btn btn-primary" onclick="showAddAnimeForm()">添加动画</button>
+                            <button class="btn btn-primary" onclick="showAddMangaForm()">添加漫画</button>
+                        </div>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h4>📤 数据导出</h4>
+                        <div class="button-group">
+                            <button class="btn btn-secondary" onclick="exportData('animes')">导出动画</button>
+                            <button class="btn btn-secondary" onclick="exportData('mangas')">导出漫画</button>
+                            <button class="btn btn-secondary" onclick="exportData('all')">导出全部</button>
+                        </div>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h4>📥 数据导入</h4>
+                        <input type="file" id="importFile" accept=".json" style="margin-bottom: 10px;">
+                        <button class="btn btn-success" onclick="importData()">导入数据</button>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h4>🗑️ 数据清理</h4>
+                        <div class="button-group">
+                            <button class="btn btn-danger" onclick="cleanupData()">清理无效数据</button>
+                            <button class="btn btn-danger" onclick="resetDatabase()">重置数据库</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据分析选项卡 -->
+        <div id="analytics" class="tab-content">
+            <div class="config-section">
+                <h3>📈 数据分析</h3>
+                <div class="alert alert-info">
+                    <strong>功能开发中：</strong> 数据分析功能正在开发中，敬请期待
+                </div>
+                
+                <div class="data-grid">
+                    <div class="data-card">
+                        <h4>📊 评分分布</h4>
+                        <p>分析作品评分的分布情况</p>
+                        <button class="btn btn-primary" onclick="analyzeRatings()">分析评分</button>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h4>🏷️ 类型统计</h4>
+                        <p>统计各类型作品的数量</p>
+                        <button class="btn btn-primary" onclick="analyzeGenres()">类型分析</button>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h4>📅 年度趋势</h4>
+                        <p>分析不同年份的作品趋势</p>
+                        <button class="btn btn-primary" onclick="analyzeYearTrends()">趋势分析</button>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h4>⭐ 推荐算法</h4>
+                        <p>基于数据生成推荐</p>
+                        <button class="btn btn-primary" onclick="generateRecommendations()">生成推荐</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 工具选项卡 -->
+        <div id="tools" class="tab-content">
+            <div class="config-section">
+                <h3>🛠️ 实用工具</h3>
+                
+                <div class="data-grid">
+                    <div class="data-card">
+                        <h4>🔍 数据查询</h4>
+                        <textarea id="queryInput" placeholder="输入Firestore查询条件..."></textarea>
+                        <button class="btn btn-primary" onclick="executeQuery()">执行查询</button>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h4>🔧 索引管理</h4>
+                        <p>管理Firebase索引配置</p>
+                        <div class="button-group">
+                            <button class="btn btn-secondary" onclick="checkIndexes()">检查索引</button>
+                            <button class="btn btn-primary" onclick="createIndexes()">创建索引</button>
+                        </div>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h4>🛡️ 安全规则</h4>
+                        <p>管理Firestore安全规则</p>
+                        <div class="button-group">
+                            <button class="btn btn-secondary" onclick="viewSecurityRules()">查看规则</button>
+                            <button class="btn btn-primary" onclick="updateSecurityRules()">更新规则</button>
+                        </div>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h4>💾 备份恢复</h4>
+                        <p>数据备份和恢复工具</p>
+                        <div class="button-group">
+                            <button class="btn btn-success" onclick="createBackup()">创建备份</button>
+                            <button class="btn btn-warning" onclick="restoreBackup()">恢复备份</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 日志区域 -->
+        <div class="log-area" id="logArea">
+            欢迎使用Firebase数据管理中心！
+            请先配置Firebase连接信息。
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { 
+            getFirestore, 
+            collection, 
+            getDocs, 
+            doc, 
+            setDoc, 
+            updateDoc, 
+            deleteDoc,
+            query,
+            where,
+            orderBy,
+            limit
+        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        // 全局变量
+        let app = null;
+        let db = null;
+        let isConnected = false;
+
+        // 切换选项卡
+        window.switchTab = function(tabName) {
+            // 隐藏所有选项卡内容
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 移除所有选项卡的active类
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 显示选中的选项卡
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        };
+
+        // 日志输出
+        function log(message, type = 'info') {
+            const logArea = document.getElementById('logArea');
+            const timestamp = new Date().toLocaleTimeString();
+            const icon = type === 'error' ? '❌' : type === 'success' ? '✅' : type === 'warning' ? '⚠️' : 'ℹ️';
+            logArea.textContent += `\n[${timestamp}] ${icon} ${message}`;
+            logArea.scrollTop = logArea.scrollHeight;
+        }
+
+        // 显示安全信息
+        function showSecurityInfo() {
+            const securityInfo = `
+                <div class="security-info">
+                    <h3>🛡️ Firebase安全说明</h3>
+                    
+                    <div class="security-section">
+                        <h4>✅ 正常现象</h4>
+                        <ul>
+                            <li>Firebase配置信息（包括API密钥）在客户端是<strong>公开可见</strong>的</li>
+                            <li>这是Firebase的正常设计，不是安全漏洞</li>
+                            <li>API密钥主要用于标识您的Firebase项目</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="security-section">
+                        <h4>🔐 真正的安全保障</h4>
+                        <ul>
+                            <li><strong>Firestore安全规则</strong> - 控制谁可以读写数据</li>
+                            <li><strong>Firebase Authentication</strong> - 用户身份验证</li>
+                            <li><strong>API配额限制</strong> - 防止滥用和超量使用</li>
+                            <li><strong>域名白名单</strong> - 限制API调用来源</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="security-section">
+                        <h4>⚙️ 推荐安全设置</h4>
+                        <ol>
+                            <li>在Firebase控制台设置HTTP引用限制</li>
+                            <li>配置严格的Firestore安全规则</li>
+                            <li>启用Firebase App Check</li>
+                            <li>定期监控API使用情况</li>
+                            <li>设置适当的配额警报</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="security-section">
+                        <h4>📋 当前项目安全状态</h4>
+                        <ul>
+                            <li>✅ 项目ID: animalist-ad3f5</li>
+                            <li>✅ 区域: asia-southeast1</li>
+                            <li>⚠️ 建议配置域名限制</li>
+                            <li>⚠️ 建议部署安全规则</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            // 创建模态框显示安全信息
+            const modal = document.createElement('div');
+            modal.className = 'security-modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close" onclick="this.parentElement.parentElement.remove()">&times;</span>
+                    ${securityInfo}
+                    <div class="modal-actions">
+                        <button onclick="window.open('https://console.firebase.google.com/project/animalist-ad3f5/settings/general', '_blank')" class="btn-primary">
+                            打开Firebase控制台
+                        </button>
+                        <button onclick="this.parentElement.parentElement.parentElement.remove()" class="btn-secondary">
+                            关闭
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        // 清空日志
+        window.clearLog = function() {
+            document.getElementById('logArea').textContent = '日志已清空';
+        };
+
+        // 测试Firebase连接
+        window.testConnection = async function() {
+            try {
+                const config = getFirebaseConfig();
+                if (!config) return;
+
+                log('正在测试Firebase连接...');
+                
+                app = initializeApp(config);
+                db = getFirestore(app);
+                
+                // 尝试读取一个集合来测试连接
+                const testRef = collection(db, 'animes');
+                const snapshot = await getDocs(query(testRef, limit(1)));
+                
+                isConnected = true;
+                updateConnectionStatus(true);
+                log('Firebase连接成功！', 'success');
+                
+                // 更新统计数据
+                await updateStats();
+                
+            } catch (error) {
+                isConnected = false;
+                updateConnectionStatus(false);
+                log(`连接失败: ${error.message}`, 'error');
+            }
+        };
+
+        // 获取Firebase配置
+        function getFirebaseConfig() {
+            const config = {
+                apiKey: document.getElementById('apiKey').value,
+                authDomain: document.getElementById('authDomain').value,
+                projectId: document.getElementById('projectId').value,
+                storageBucket: document.getElementById('storageBucket').value,
+                messagingSenderId: document.getElementById('messagingSenderId').value,
+                appId: document.getElementById('appId').value
+            };
+
+            // 验证配置
+            for (const [key, value] of Object.entries(config)) {
+                if (!value) {
+                    log(`请填写 ${key}`, 'error');
+                    return null;
+                }
+            }
+
+            return config;
+        }
+
+        // 更新连接状态
+        function updateConnectionStatus(connected) {
+            const statusElement = document.getElementById('connectionStatus');
+            const indicator = statusElement.querySelector('.status-indicator');
+            
+            if (connected) {
+                indicator.className = 'status-indicator status-connected';
+                statusElement.innerHTML = '<span class="status-indicator status-connected"></span>已连接';
+            } else {
+                indicator.className = 'status-indicator status-disconnected';
+                statusElement.innerHTML = '<span class="status-indicator status-disconnected"></span>未连接';
+            }
+        }
+
+        // 保存配置
+        window.saveConfig = function() {
+            const config = getFirebaseConfig();
+            if (!config) return;
+
+            localStorage.setItem('firebaseConfig', JSON.stringify(config));
+            log('配置已保存到本地存储', 'success');
+        };
+
+        // 加载保存的配置
+        function loadSavedConfig() {
+            const savedConfig = localStorage.getItem('firebaseConfig');
+            if (savedConfig) {
+                const config = JSON.parse(savedConfig);
+                document.getElementById('apiKey').value = config.apiKey || '';
+                document.getElementById('authDomain').value = config.authDomain || '';
+                document.getElementById('projectId').value = config.projectId || '';
+                document.getElementById('storageBucket').value = config.storageBucket || '';
+                document.getElementById('messagingSenderId').value = config.messagingSenderId || '';
+                document.getElementById('appId').value = config.appId || '';
+                log('已加载保存的配置', 'info');
+            }
+        }
+
+        // 更新统计数据
+        async function updateStats() {
+            if (!isConnected) return;
+
+            try {
+                // 统计动画数量
+                const animesRef = collection(db, 'animes');
+                const animesSnapshot = await getDocs(animesRef);
+                document.getElementById('animeCount').textContent = animesSnapshot.size;
+
+                // 统计漫画数量
+                const mangasRef = collection(db, 'mangas');
+                const mangasSnapshot = await getDocs(mangasRef);
+                document.getElementById('mangaCount').textContent = mangasSnapshot.size;
+
+                // 统计用户数量
+                const usersRef = collection(db, 'users');
+                const usersSnapshot = await getDocs(usersRef);
+                document.getElementById('userCount').textContent = usersSnapshot.size;
+
+                // 统计评论数量
+                const reviewsRef = collection(db, 'reviews');
+                const reviewsSnapshot = await getDocs(reviewsRef);
+                document.getElementById('reviewCount').textContent = reviewsSnapshot.size;
+
+                log('统计数据已更新', 'success');
+            } catch (error) {
+                log(`更新统计数据失败: ${error.message}`, 'error');
+            }
+        }
+
+        // 数据迁移相关函数
+        window.migrateAnimes = async function() {
+            if (!isConnected) {
+                log('请先连接Firebase', 'error');
+                return;
+            }
+            log('动画数据迁移功能开发中...', 'warning');
+        };
+
+        window.migrateMangas = async function() {
+            if (!isConnected) {
+                log('请先连接Firebase', 'error');
+                return;
+            }
+            log('漫画数据迁移功能开发中...', 'warning');
+        };
+
+        window.migrateAll = async function() {
+            if (!isConnected) {
+                log('请先连接Firebase', 'error');
+                return;
+            }
+            log('完整数据迁移功能开发中...', 'warning');
+        };
+
+        window.validateMigration = async function() {
+            if (!isConnected) {
+                log('请先连接Firebase', 'error');
+                return;
+            }
+            await updateStats();
+            log('数据验证完成', 'success');
+        };
+
+        // 数据管理相关函数
+        window.showAddAnimeForm = function() {
+            log('添加动画表单功能开发中...', 'warning');
+        };
+
+        window.showAddMangaForm = function() {
+            log('添加漫画表单功能开发中...', 'warning');
+        };
+
+        window.exportData = function(type) {
+            log(`导出${type}数据功能开发中...`, 'warning');
+        };
+
+        window.importData = function() {
+            log('导入数据功能开发中...', 'warning');
+        };
+
+        window.cleanupData = function() {
+            log('数据清理功能开发中...', 'warning');
+        };
+
+        window.resetDatabase = function() {
+            if (confirm('确定要重置数据库吗？此操作不可恢复！')) {
+                log('数据库重置功能开发中...', 'warning');
+            }
+        };
+
+        // 分析相关函数
+        window.analyzeRatings = function() {
+            log('评分分析功能开发中...', 'warning');
+        };
+
+        window.analyzeGenres = function() {
+            log('类型分析功能开发中...', 'warning');
+        };
+
+        window.analyzeYearTrends = function() {
+            log('年度趋势分析功能开发中...', 'warning');
+        };
+
+        window.generateRecommendations = function() {
+            log('推荐生成功能开发中...', 'warning');
+        };
+
+        // 工具相关函数
+        window.executeQuery = function() {
+            log('查询执行功能开发中...', 'warning');
+        };
+
+        window.checkIndexes = function() {
+            log('索引检查功能开发中...', 'warning');
+        };
+
+        window.createIndexes = function() {
+            log('索引创建功能开发中...', 'warning');
+        };
+
+        window.viewSecurityRules = function() {
+            log('安全规则查看功能开发中...', 'warning');
+        };
+
+        window.updateSecurityRules = function() {
+            log('安全规则更新功能开发中...', 'warning');
+        };
+
+        window.createBackup = function() {
+            log('备份创建功能开发中...', 'warning');
+        };
+
+        window.restoreBackup = function() {
+            log('备份恢复功能开发中...', 'warning');
+        };
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSavedConfig();
+            log('Firebase数据管理中心已就绪');
+        });
+    </script>
+</body>
+</html>

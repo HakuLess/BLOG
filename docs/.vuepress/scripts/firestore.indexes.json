@@ -1,0 +1,432 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "animes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "basic.status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ratings.average",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "animes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "classification.genres",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "ratings.average",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "animes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "dates.aired.year",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "ratings.average",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "animes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "basic.status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "dates.aired.year",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "animes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "classification.genres",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "basic.status",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "animes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "production.studio",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "dates.aired.year",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "animes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "basic.title",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "animes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "basic.titleEnglish",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mangas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "basic.status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ratings.average",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mangas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "classification.genres",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "ratings.average",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mangas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "dates.published.year",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "ratings.average",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mangas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "basic.status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "dates.published.year",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mangas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "classification.genres",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "basic.status",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mangas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "production.author",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "dates.published.year",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mangas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "basic.title",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mangas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "basic.titleEnglish",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "profile.username",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "profile.email",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "metadata.createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "reviews",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "itemType",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "itemId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "reviews",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "reviews",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "rating",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lists",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "type",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lists",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "isPublic",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "updatedAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lists",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "tags",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "updatedAt",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "animes",
+      "fieldPath": "basic.title",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "animes",
+      "fieldPath": "basic.titleEnglish",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "animes",
+      "fieldPath": "classification.genres",
+      "indexes": [
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "animes",
+      "fieldPath": "classification.tags",
+      "indexes": [
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mangas",
+      "fieldPath": "basic.title",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mangas",
+      "fieldPath": "basic.titleEnglish",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mangas",
+      "fieldPath": "classification.genres",
+      "indexes": [
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mangas",
+      "fieldPath": "classification.tags",
+      "indexes": [
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "users",
+      "fieldPath": "preferences.favoriteGenres",
+      "indexes": [
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lists",
+      "fieldPath": "tags",
+      "indexes": [
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    }
+  ]
+}

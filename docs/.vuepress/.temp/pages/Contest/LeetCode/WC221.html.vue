@@ -47,7 +47,7 @@
 <li>1：小球向右下落</li>
 <li>-1：小球向左下落</li>
 </ul>
-<p>之后直接遍历最顶层的球即可，时间复杂度为$O(n^3)$。也可以增加$memo$算出每个格子的最终结果，将时间复杂度降为$O(n^2)$。</p>
+<p>之后直接遍历最顶层的球即可，时间复杂度为$O(n<sup>3)$。也可以增加$memo$算出每个格子的最终结果，将时间复杂度降为$O(n</sup>2)$。</p>
 <div class="language-kotlin line-numbers-mode" data-highlighter="shiki" data-ext="kotlin" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34"><pre class="shiki shiki-themes one-light one-dark-pro vp-code" v-pre=""><code class="language-kotlin"><span class="line"><span style="--shiki-light:#A626A4;--shiki-dark:#C678DD">class</span><span style="--shiki-light:#C18401;--shiki-dark:#E5C07B"> Solution5210</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line"><span style="--shiki-light:#A626A4;--shiki-dark:#C678DD">    fun</span><span style="--shiki-light:#4078F2;--shiki-dark:#61AFEF"> findBall</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">(grid: </span><span style="--shiki-light:#C18401;--shiki-dark:#E5C07B">Array</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="--shiki-light:#C18401;--shiki-dark:#E5C07B">IntArray</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">>): </span><span style="--shiki-light:#C18401;--shiki-dark:#E5C07B">IntArray</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line"><span style="--shiki-light:#A626A4;--shiki-dark:#C678DD">        val</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF"> n </span><span style="--shiki-light:#383A42;--shiki-dark:#56B6C2">=</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF"> grid.size</span></span>

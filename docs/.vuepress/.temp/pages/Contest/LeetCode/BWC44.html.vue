@@ -58,7 +58,7 @@ $$
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="q4-1735-生成乘积数组的方案数" tabindex="-1"><a class="header-anchor" href="#q4-1735-生成乘积数组的方案数"><span>Q4 <a href="https://leetcode-cn.com/problems/count-ways-to-make-array-with-product/" target="_blank" rel="noopener noreferrer">1735. 生成乘积数组的方案数</a></span></a></h2>
 <p>数学题目，之前见到过一次类似的，但是比赛时没搞出来。n个数的乘积为k，能够想到需要先将k因式分解。分解成t个质数的乘积，然后将这t个质数分配到n个位置上，由于质数可能是重复的，因此需要使用<strong>重复组合</strong>的公式。
 $$
-H_{n}^r=C_{n+r-1}^r=\frac{(n+r-1)!}{r!(n-1)!}
+H_{n}<sup>r=C_{n+r-1}</sup>r=\frac{(n+r-1)!}{r!(n-1)!}
 $$
 即，从n个不同元素中，取出r个可重复的元素，有多少种组合。</p>
 <p>以(4，12)为例，12可以因式分解为 2 * 2 * 3。一共有4个格子需要填充。对于3的组合，一共有4种，分别可以放在0、1、2、3的格子上，而两个2可以按照刚才的公式(4+2-1)!/2!/3! = 5 * 4 * 3 * 2 / 2 / 3 / 2 = 10，则总组合数为4 * 10。具体示例如下：</p>

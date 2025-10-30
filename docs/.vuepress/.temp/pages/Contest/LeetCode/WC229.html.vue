@@ -33,7 +33,7 @@
 <span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">    }</span></span>
 <span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">}</span></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="q3-5687-执行乘法运算的最大分数" tabindex="-1"><a class="header-anchor" href="#q3-5687-执行乘法运算的最大分数"><span>Q3 <a href="https://leetcode-cn.com/problems/maximum-score-from-performing-multiplication-operations/" target="_blank" rel="noopener noreferrer">5687. 执行乘法运算的最大分数</a></span></a></h2>
-<p>记忆化搜索标准题目。这题如果用DP来做公式很绕，但是用DFS自顶向下非常好理解。由于m的最大值为$10^3$，状态总数最大为$10^6$。</p>
+<p>记忆化搜索标准题目。这题如果用DP来做公式很绕，但是用DFS自顶向下非常好理解。由于m的最大值为$10<sup>3$，状态总数最大为$10</sup>6$。</p>
 <p>设l为当前最左侧的index，r为当前最右侧的index，i为已经加完的次数（其实可以通过l和r推到出i，这里传参只是为了方便计算）。可以有
 $$
 dfs(l, j, i) = maxOf(select(l) + dfs(l + 1, j, i + 1), select(r) + dfs(l, j + 1, i + 1))
