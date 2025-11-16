@@ -59,6 +59,7 @@ export default defineUserConfig({
           { text: "📊 观看总结", link: "/Anime/" },
           { text: "🎞️ 动画专区", link: "/Anime/animation/" },
           { text: "📚 漫画专区", link: "/Anime/manga/" },
+          { text: "🔐 登录入口", link: "/Login/" },
         ],
       },
       {

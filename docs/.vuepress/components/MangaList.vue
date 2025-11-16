@@ -1,7 +1,6 @@
 <template>
   <div class="manga-manager">
     <div class="controls">
-      <AuthBar />
       <div class="control">
         <label>类型</label>
         <select v-model="filters.genre">
@@ -32,7 +31,7 @@
       <div class="control search">
         <input v-model="keyword" placeholder="搜索标题" @input="onSearch" />
       </div>
-      <button class="primary" v-if="isAdmin" @click="openCreate">新增漫画</button>
+      <button class="primary" v-if="user" @click="openCreate">新增漫画</button>
     </div>
     <div v-if="loading" class="state">加载中</div>
     <div v-else>
@@ -50,9 +49,31 @@
               <span>{{ it.chapters ? it.chapters + '话' : '' }}</span>
             </div>
             <div class="genres">{{ (it.genres||[]).slice(0,3).join(' · ') }}</div>
-            <div class="actions" v-if="isAdmin">
+            <div class="actions" v-if="user">
               <button @click="openEdit(it)">编辑</button>
               <button class="danger" @click="remove(it)">删除</button>
+              <button @click="toggleProgress(it)">进度</button>
+            </div>
+            <div class="progress-editor" v-if="user && progressOpen[it.id]">
+              <div class="row">
+                <label>已读话数</label>
+                <input type="number" v-model.number="progressMap[it.id].readChapters" />
+              </div>
+              <div class="row">
+                <label>已读卷数</label>
+                <input type="number" v-model.number="progressMap[it.id].readVolumes" />
+              </div>
+              <div class="row">
+                <label>状态</label>
+                <select v-model="progressMap[it.id].status">
+                  <option value="planning">planning</option>
+                  <option value="reading">reading</option>
+                  <option value="completed">completed</option>
+                  <option value="dropped">dropped</option>
+                  <option value="on_hold">on_hold</option>
+                </select>
+              </div>
+              <button class="primary" @click="saveProgress(it)">保存进度</button>
             </div>
           </div>
         </div>
@@ -96,6 +117,9 @@
         </div>
       </div>
     </div>
+    <div class="auth-bottom">
+      <AuthBar />
+    </div>
   </div>
 </template>
 
@@ -119,6 +143,17 @@ const genresInput = ref('')
 const tagsInput = ref('')
 const user = ref(null)
 const isAdmin = ref(false)
+onMounted(()=>{
+  console.log('[MangaList] mounted')
+  authService.onUserChanged(async u=>{
+    console.log('[MangaList] onUserChanged user=', u)
+    user.value = u
+    isAdmin.value = await authService.isAdmin()
+    console.log('[MangaList] isAdmin=', isAdmin.value)
+  })
+})
+const progressOpen = ref({})
+const progressMap = ref({})
 
 function placeholder(t){
   return `https://via.placeholder.com/300x400/4ECDC4/FFFFFF?text=${encodeURIComponent(t||'Manga')}`
@@ -228,6 +263,27 @@ async function remove(it){
   }
 }
 
+function toggleProgress(it){
+  const id = it.id
+  progressOpen.value[id] = !progressOpen.value[id]
+  if (progressOpen.value[id]){
+    const uid = user.value && user.value.uid
+    if (!uid) return
+    animeService.getMangaProgress(uid, id).then(r=>{
+      const d = r.data || { readChapters: it.readChapters || 0, readVolumes: it.readVolumes || 0, status: it.status || 'planning' }
+      progressMap.value[id] = d
+    })
+  }
+}
+
+async function saveProgress(it){
+  const uid = user.value && user.value.uid
+  if (!uid) return
+  const d = progressMap.value[it.id] || {}
+  const res = await animeService.upsertMangaProgress(uid, it.id, d)
+  if (res.success){ if (analytics) logEvent(analytics, 'manga_progress_save') }
+}
+
 onMounted(fetchList)
 onUnmounted(()=>{ if (unsubscribe) unsubscribe() })
 
@@ -270,6 +326,8 @@ async function logout(){
 .genres{color:#666;font-size:12px;margin-bottom:8px}
 .actions{display:flex;gap:8px}
 .actions .danger{background:#ef4444;color:#fff;border:none;border-radius:6px;padding:6px 10px;cursor:pointer}
+.progress-editor{display:flex;gap:12px;align-items:center;margin-top:10px}
+.progress-editor .row{display:flex;gap:8px;align-items:center}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000}
 .dialog{background:#fff;border-radius:12px;width:720px;max-width:95vw}
 .dialog-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #eee}

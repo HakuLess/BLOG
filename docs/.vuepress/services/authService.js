@@ -1,5 +1,5 @@
 import { auth } from '../firebase.js'
-import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, getIdTokenResult } from 'firebase/auth'
+import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, getIdTokenResult, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
 
 const provider = new GoogleAuthProvider()
 
@@ -22,4 +22,12 @@ async function isAdmin(){
   return token.claims && token.claims.admin === true
 }
 
-export default { auth, login, logout, onUserChanged, isAdmin }
+async function loginWithEmail(email, password){
+  return signInWithEmailAndPassword(auth, email, password)
+}
+
+async function registerWithEmail(email, password){
+  return createUserWithEmailAndPassword(auth, email, password)
+}
+
+export default { auth, login, logout, onUserChanged, isAdmin, loginWithEmail, registerWithEmail }

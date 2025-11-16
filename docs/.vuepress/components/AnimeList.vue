@@ -1,8 +1,6 @@
 <template>
   <div class="anime-manager">
     <div class="controls">
-      <AuthBar />
-      <AuthBar />
       <div class="control">
         <label>类型</label>
         <select v-model="filters.genre">
@@ -54,6 +52,24 @@
             <div class="actions" v-if="user">
               <button @click="openEdit(it)">编辑</button>
               <button class="danger" @click="remove(it)">删除</button>
+              <button @click="toggleProgress(it)">进度</button>
+            </div>
+            <div class="progress-editor" v-if="user && progressOpen[it.id]">
+              <div class="row">
+                <label>已看集数</label>
+                <input type="number" v-model.number="progressMap[it.id].watchedEpisodes" />
+              </div>
+              <div class="row">
+                <label>状态</label>
+                <select v-model="progressMap[it.id].status">
+                  <option value="planning">planning</option>
+                  <option value="watching">watching</option>
+                  <option value="completed">completed</option>
+                  <option value="dropped">dropped</option>
+                  <option value="on_hold">on_hold</option>
+                </select>
+              </div>
+              <button class="primary" @click="saveProgress(it)">保存进度</button>
             </div>
           </div>
         </div>
@@ -95,6 +111,9 @@
         </div>
       </div>
     </div>
+    <div class="auth-bottom">
+      <AuthBar />
+    </div>
   </div>
 </template>
 
@@ -102,7 +121,6 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import animeService from '../services/animeService.js'
 import authService from '../services/authService.js'
-import AuthBar from './AuthBar.vue'
 import AuthBar from './AuthBar.vue'
 import { analytics } from '../firebase.js'
 import { logEvent } from 'firebase/analytics'
@@ -119,6 +137,9 @@ const genresInput = ref('')
 const tagsInput = ref('')
 const user = ref(null)
 const isAdmin = ref(false)
+let unsubscribe = null
+const progressOpen = ref({})
+const progressMap = ref({})
 
 function placeholder(t){
   return `https://via.placeholder.com/300x400/FF6B6B/FFFFFF?text=${encodeURIComponent(t||'Anime')}`
@@ -222,22 +243,47 @@ async function remove(it){
   }
 }
 
+function toggleProgress(it){
+  const id = it.id
+  progressOpen.value[id] = !progressOpen.value[id]
+  if (progressOpen.value[id]){
+    const uid = user.value && user.value.uid
+    if (!uid) return
+    animeService.getAnimeProgress(uid, id).then(r=>{
+      const d = r.data || { watchedEpisodes: it.watchedEpisodes || 0, status: it.status || 'planning' }
+      progressMap.value[id] = d
+    })
+  }
+}
+
+async function saveProgress(it){
+  const uid = user.value && user.value.uid
+  if (!uid) return
+  const d = progressMap.value[it.id] || {}
+  const res = await animeService.upsertAnimeProgress(uid, it.id, d)
+  if (res.success){ if (analytics) logEvent(analytics, 'anime_progress_save') }
+}
+
 onMounted(fetchList)
 onUnmounted(()=>{ if (unsubscribe) unsubscribe() })
 
 onMounted(()=>{
   authService.onUserChanged(async u=>{
+    console.log('[AnimeList] onUserChanged user=', u)
     user.value = u
     isAdmin.value = await authService.isAdmin()
+    console.log('[AnimeList] isAdmin=', isAdmin.value)
   })
 })
 
 async function login(){
+  console.log('[AnimeList] login click')
   await authService.login()
   isAdmin.value = await authService.isAdmin()
 }
 
 async function logout(){
+  console.log('[AnimeList] logout click')
   await authService.logout()
   user.value = null
   isAdmin.value = false
@@ -264,6 +310,8 @@ async function logout(){
 .genres{color:#666;font-size:12px;margin-bottom:8px}
 .actions{display:flex;gap:8px}
 .actions .danger{background:#ef4444;color:#fff;border:none;border-radius:6px;padding:6px 10px;cursor:pointer}
+.progress-editor{display:flex;gap:12px;align-items:center;margin-top:10px}
+.progress-editor .row{display:flex;gap:8px;align-items:center}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000}
 .dialog{background:#fff;border-radius:12px;width:720px;max-width:95vw}
 .dialog-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #eee}

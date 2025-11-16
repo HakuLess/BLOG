@@ -13,7 +13,9 @@ import {
   orderBy, 
   limit,
   serverTimestamp,
-  onSnapshot
+  onSnapshot,
+  setDoc,
+  runTransaction
 } from 'firebase/firestore';
 
 /**
@@ -154,6 +156,34 @@ class AnimeService {
     } catch (error) {
       console.error('订阅漫画失败:', error)
       return () => {}
+    }
+  }
+
+  subscribeUserAnimeProgress(uid, onData){
+    try{
+      const col = collection(db, 'userProgress', uid, 'animes')
+      return onSnapshot(col, (snap)=>{
+        const map = {}
+        snap.forEach(d=>{ map[d.id] = d.data() })
+        onData(map)
+      })
+    }catch(error){
+      console.error('订阅用户动画进度失败:', error)
+      return ()=>{}
+    }
+  }
+
+  subscribeUserMangaProgress(uid, onData){
+    try{
+      const col = collection(db, 'userProgress', uid, 'mangas')
+      return onSnapshot(col, (snap)=>{
+        const map = {}
+        snap.forEach(d=>{ map[d.id] = d.data() })
+        onData(map)
+      })
+    }catch(error){
+      console.error('订阅用户漫画进度失败:', error)
+      return ()=>{}
     }
   }
   /**
@@ -660,6 +690,83 @@ class AnimeService {
     }
   }
 
+  async upsertAnimeProgress(uid, animeId, payload) {
+    try {
+      const ref = doc(collection(db, 'userProgress', uid, 'animes'), animeId)
+      await setDoc(ref, { ...payload, lastUpdated: serverTimestamp() }, { merge: true })
+      return { success: true }
+    } catch (error) {
+      return { success: false, error: error.message }
+    }
+  }
+
+  async getAnimeProgress(uid, animeId) {
+    try {
+      const ref = doc(collection(db, 'userProgress', uid, 'animes'), animeId)
+      const snap = await getDoc(ref)
+      return snap.exists() ? { success: true, data: snap.data() } : { success: true, data: null }
+    } catch (error) {
+      return { success: false, error: error.message }
+    }
+  }
+
+  async upsertMangaProgress(uid, mangaId, payload) {
+    try {
+      const ref = doc(collection(db, 'userProgress', uid, 'mangas'), mangaId)
+      await setDoc(ref, { ...payload, lastUpdated: serverTimestamp() }, { merge: true })
+      return { success: true }
+    } catch (error) {
+      return { success: false, error: error.message }
+    }
+  }
+
+  async getMangaProgress(uid, mangaId) {
+    try {
+      const ref = doc(collection(db, 'userProgress', uid, 'mangas'), mangaId)
+      const snap = await getDoc(ref)
+      return snap.exists() ? { success: true, data: snap.data() } : { success: true, data: null }
+    } catch (error) {
+      return { success: false, error: error.message }
+    }
+  }
+
+  async rateAnime(id, score) {
+    try {
+      const ref = doc(this.animesCollection, id)
+      await runTransaction(db, async (tx) => {
+        const snap = await tx.get(ref)
+        if (!snap.exists()) throw new Error('not found')
+        const data = snap.data()
+        const count = parseInt(data.ratingCount || 0)
+        const current = parseFloat(data.rating || 0)
+        const newCount = count + 1
+        const newRating = ((current * count) + parseFloat(score)) / newCount
+        tx.update(ref, { rating: newRating, ratingCount: newCount, updatedAt: serverTimestamp() })
+      })
+      return { success: true }
+    } catch (error) {
+      return { success: false, error: error.message }
+    }
+  }
+
+  async rateManga(id, score) {
+    try {
+      const ref = doc(this.mangasCollection, id)
+      await runTransaction(db, async (tx) => {
+        const snap = await tx.get(ref)
+        if (!snap.exists()) throw new Error('not found')
+        const data = snap.data()
+        const count = parseInt(data.ratingCount || 0)
+        const current = parseFloat(data.rating || 0)
+        const newCount = count + 1
+        const newRating = ((current * count) + parseFloat(score)) / newCount
+        tx.update(ref, { rating: newRating, ratingCount: newCount, updatedAt: serverTimestamp() })
+      })
+      return { success: true }
+    } catch (error) {
+      return { success: false, error: error.message }
+    }
+  }
 }
 // 创建单例实例
 const animeService = new AnimeService();
