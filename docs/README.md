@@ -1,5 +1,9 @@
 # HaKu's Blog
 
+<ClientOnly>
+  <AuthBar />
+</ClientOnly>
+
 欢迎来到我的博客！
 
 ## 内容导航

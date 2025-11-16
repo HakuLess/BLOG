@@ -2,6 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAnalytics } from 'firebase/analytics';
+import { getAuth } from 'firebase/auth';
 import { firebaseConfig, firebaseServices } from './config/firebase-config.js';
 
 // 初始化Firebase应用
@@ -9,6 +10,7 @@ const app = initializeApp(firebaseConfig);
 
 // 初始化Firestore
 export const db = getFirestore(app);
+export const auth = getAuth(app);
 
 // 在开发环境中可以连接到Firestore模拟器
 // if (process.env.NODE_ENV === 'development' && !db._delegate._databaseId.projectId.includes('demo-')) {

@@ -31,7 +31,7 @@ export const firebaseServices = {
   // 启用的服务
   firestore: true,
   analytics: true,
-  auth: false, // 暂未启用认证
+  auth: true,
   storage: false, // 暂未启用存储
   
   // Firestore配置

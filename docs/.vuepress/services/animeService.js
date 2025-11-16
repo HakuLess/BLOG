@@ -12,7 +12,8 @@ import {
   where, 
   orderBy, 
   limit,
-  serverTimestamp 
+  serverTimestamp,
+  onSnapshot
 } from 'firebase/firestore';
 
 /**
@@ -67,6 +68,30 @@ class AnimeService {
   }
 
   /**
+   * 订阅动画列表（实时）
+   * @param {Object} filters 筛选条件
+   * @param {(Array)=>void} onData 数据回调
+   * @returns {Function} 取消订阅函数
+   */
+  subscribeAnimes(filters = {}, onData) {
+    try {
+      let q = this.animesCollection;
+      if (filters.genre) q = query(q, where('genres', 'array-contains', filters.genre));
+      if (filters.status) q = query(q, where('status', '==', filters.status));
+      if (filters.rating) q = query(q, where('rating', '>=', parseFloat(filters.rating)));
+      q = query(q, orderBy('rating', 'desc'));
+      return onSnapshot(q, (snapshot) => {
+        const list = [];
+        snapshot.forEach((d)=> list.push({ id: d.id, ...d.data() }))
+        onData(list)
+      })
+    } catch (error) {
+      console.error('订阅动画失败:', error)
+      return () => {}
+    }
+  }
+
+  /**
    * 获取所有漫画
    * @param {Object} filters - 筛选条件
    * @returns {Promise<Array>} 漫画列表
@@ -108,6 +133,29 @@ class AnimeService {
     }
   }
 
+  /**
+   * 订阅漫画列表（实时）
+   * @param {Object} filters 筛选条件
+   * @param {(Array)=>void} onData 数据回调
+   * @returns {Function} 取消订阅函数
+   */
+  subscribeMangas(filters = {}, onData) {
+    try {
+      let q = this.mangasCollection;
+      if (filters.genre) q = query(q, where('genres', 'array-contains', filters.genre));
+      if (filters.status) q = query(q, where('status', '==', filters.status));
+      if (filters.rating) q = query(q, where('rating', '>=', parseFloat(filters.rating)));
+      q = query(q, orderBy('rating', 'desc'));
+      return onSnapshot(q, (snapshot) => {
+        const list = [];
+        snapshot.forEach((d)=> list.push({ id: d.id, ...d.data() }))
+        onData(list)
+      })
+    } catch (error) {
+      console.error('订阅漫画失败:', error)
+      return () => {}
+    }
+  }
   /**
    * 根据ID获取动画详情
    * @param {string} id - 动画ID
@@ -277,7 +325,7 @@ class AnimeService {
       return [];
     }
   }
-}
+
 
   /**
    * 添加新动画
@@ -612,6 +660,7 @@ class AnimeService {
     }
   }
 
+}
 // 创建单例实例
 const animeService = new AnimeService();
 
