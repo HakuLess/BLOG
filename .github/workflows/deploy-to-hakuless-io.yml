@@ -5,13 +5,6 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
-permissions:
-  contents: write
-  actions: write
-  deployments: write
-  pages: write
-  id-token: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,7 +33,7 @@ jobs:
         run: npm run docs:build
       
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.PAT_TOKEN_V3 }}
           external_repository: HakuLess/HakuLess.github.io
