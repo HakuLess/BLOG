@@ -148,6 +148,21 @@ module.exports = {
                     ]
                 }
             ],
+            '/Life/Money/': [
+                {
+                    title: '资产分析',
+                    collapsable: true,
+                    children: [
+                        { title: '资产总览', path: '/Life/Money/资产总览.md' },
+                        { title: '资产分析2026', path: '/Life/Money/资产分析2026.md' },
+                        { title: '资产分析2025', path: '/Life/Money/资产分析2025.md' },
+                        { title: '资产分析2024', path: '/Life/Money/资产分析2024.md' },
+                        { title: '资产分析2022', path: '/Life/Money/资产分析2022.md' },
+                        { title: '资产分析2021', path: '/Life/Money/资产分析2021.md' },
+                        { title: '资产分析2020', path: '/Life/Money/资产分析2020.md' },
+                    ]
+                }
+            ],
         }
     },
     markdown: {
