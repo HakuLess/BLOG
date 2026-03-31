@@ -42,7 +42,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.PAT_TOKEN_V3 }}
+          personal_token: ${{ secrets.PAT_TOKEN_V3 }}
           external_repository: HakuLess/HakuLess.github.io
           publish_dir: ./docs/.vuepress/dist
           publish_branch: master
