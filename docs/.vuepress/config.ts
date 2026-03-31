@@ -218,6 +218,7 @@ export default defineUserConfig({
           collapsible: true,
           children: [
             { text: "资产总览", link: "/Life/Money/资产总览.md" },
+            { text: "资产分析2026", link: "/Life/Money/资产分析2026.md" },
             { text: "资产分析2025", link: "/Life/Money/资产分析2025.md" },
             { text: "资产分析2024", link: "/Life/Money/资产分析2024.md" },
             { text: "资产分析2022", link: "/Life/Money/资产分析2022.md" },
