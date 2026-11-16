@@ -92,6 +92,7 @@ export default defineUserConfig({
         text: "Life",
         children: [
           { text: "Money", link: "/Life/Money/" },
+          { text: "共同生活", link: "/Life/Diary/" },
           { text: "Play", link: "/Life/Play/" },
         ],
       },
@@ -226,6 +227,13 @@ export default defineUserConfig({
             { text: "资产分析2021", link: "/Life/Money/资产分析2021.md" },
             { text: "资产分析2020", link: "/Life/Money/资产分析2020.md" },
           ],
+        },
+      ],
+      "/Life/Diary/": [
+        {
+          text: "共同生活",
+          collapsible: true,
+          children: [{ text: "一起走过的日常", link: "/Life/Diary/" }],
         },
       ],
       "/Anime/": [
