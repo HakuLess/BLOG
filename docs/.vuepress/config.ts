@@ -239,6 +239,15 @@ export default defineUserConfig({
           ],
         },
       ],
+      "/Life/Play/": [
+        {
+          text: "娱乐生活",
+          collapsible: true,
+          children: [
+            { text: "上海迪士尼一日攻略", link: "/Life/Play/shanghai-disneyland-2026-11-21/" },
+          ],
+        },
+      ],
       "/Anime/": [
         {
           text: "📊 观看总结",

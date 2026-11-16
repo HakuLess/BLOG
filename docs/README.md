@@ -22,6 +22,7 @@
 - [理财分析](/Life/Money/)
 - [共同生活](/Life/Diary/)
 - [娱乐生活](/Life/Play/)
+  - [上海迪士尼一日攻略｜情侣路线（2026-11-21）](/Life/Play/shanghai-disneyland-2026-11-21/)
 
 ---
 
