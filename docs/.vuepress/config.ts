@@ -233,7 +233,10 @@ export default defineUserConfig({
         {
           text: "共同生活",
           collapsible: true,
-          children: [{ text: "一起走过的日常", link: "/Life/Diary/" }],
+          children: [
+            { text: "一起走过的日常", link: "/Life/Diary/" },
+            { text: "2026 年的共同回忆", link: "/Life/Diary/2026.md" },
+          ],
         },
       ],
       "/Anime/": [
