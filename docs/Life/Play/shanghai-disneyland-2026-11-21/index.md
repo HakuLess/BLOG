@@ -50,6 +50,47 @@
 
 我建议先把**小飞侠**或**巴斯光年**加进备选：前者顺路、氛围轻松；后者有双人互动感。晶彩奇航适合想休息、看景时安排。
 
+### 不只排队：演出、互动和园区探索
+
+11 月 21 日正好在上海迪士尼“奇幻冬日季”期间（2026 年 11 月 19 日至 2027 年 2 月 20 日）。除了排队乘项目，还可以挑几项演出、互动和步行探索。演出会受运营安排和天气影响，具体场次当天以官方 App 为准。([奇幻冬日季官方介绍](https://shcorporate.shanghaidisneyresort.com/wp-content/uploads/2026/11/Press-Release-Shanghai-Disney-Resort-Invites-Guests-into-a-World-of-Fairytale-Enchantment-at-Disney-Winter-Frostival.pdf))
+
+#### 这次优先考虑的冬日活动
+
+- **米奇的奇妙飞雪时刻**：在米奇大街感受飘雪氛围，顺便拍冬日街景。
+- **迪士尼奇幻冬日巡游**：找一段方便停留的路线观看巡游，替代一段排队时间。
+- **“奇妙有你”欢庆团：雪宝的冬日温暖**：城堡观赏区的互动演出，可以跟着唱歌、舞动。
+- **欢庆迪士尼奇幻冬日季**：傍晚留意城堡与奇想花园的冬日灯光投影演出。
+- **“奇妙之心”城堡秀**：白天的户外舞台演出；和夜间城堡秀是不同场次，是否安排看当天演出表。([官方介绍](https://www.shanghaidisneyresort.com/zh-cn/experience/entertainment/the-heart-of-magic))
+
+这几项的开演时间和是否受天气影响，以当天 App 为准。米奇和朋友们的冬日新装、达菲和朋友们的圣诞新装从 **12 月 1 日**起推出，11 月 21 日不建议把特定节日服装当作必看目标。([官方冬日季公告](https://shcorporate.shanghaidisneyresort.com/wp-content/uploads/2026/11/Press-Release-Shanghai-Disney-Resort-Invites-Guests-into-a-World-of-Fairytale-Enchantment-at-Disney-Winter-Frostival.pdf))
+
+#### 室内演出：冷了或想坐下来时
+
+- **风暴来临：杰克船长之惊天特技大冒险**：在宝藏湾看舞台特技，和加勒比海盗路线顺路。
+- **冰雪奇缘：欢唱盛会**：梦幻世界室内剧场演出，适合中午休息。
+- **米奇妙游童话书**：室内舞台演出，米奇和迪士尼角色串联多个故事。
+
+选一场最感兴趣、时间最合适的就够了；进场和选座仍可能需要提前等候。当天演出列表见[官方娱乐演出页](https://www.shanghaidisneyresort.com/zh-cn/experience?group=entertainment)。
+
+#### 角色互动与不赶路的探索
+
+- **角色见面**：从达菲和朋友们、玲娜贝儿、迪士尼公主、朱迪和尼克等见面点里挑一个；不同角色的开放时间会变，先看 App 再决定去哪儿。([官方角色见面列表](https://www.shanghaidisneyresort.com/zh-cn/experience?group=characters))
+- **漫游童话时光**：在城堡里走进白雪公主故事，属于室内互动体验；放在茶杯之后最顺路。([官方介绍](https://www.shanghaidisneyresort.com/zh-cn/experience/attraction/once-upon-time-adventure))
+- **爱丽丝梦游仙境迷宫**：自己找路线、拍场景照，适合不想坐项目时慢慢逛。([官方介绍](https://www.shanghaidisneyresort.com/zh-cn/experience/attraction/alice-wonderland-maze))
+- **古迹探索营的探索步行道**：在探险岛走一段户外步道，看看主题布景；如果想挑战体力，再查看绳索挑战道是否开放及身高要求。([官方介绍](https://www.shanghaidisneyresort.com/zh-cn/experience/attraction/vista-trail))
+- **探秘海妖复仇号**：到宝藏湾登上海盗船探索，适合和海盗主题区域一起逛。互动项目列表见[官方园区项目页](https://www.shanghaidisneyresort.com/zh-cn/experience?group=attraction)。
+- **主题区寻景拍照**：不赶项目时，分别在城堡、疯狂动物城和宝藏湾找喜欢的背景，拍一组主题照片。
+- **节庆小食和街头音乐**：逛米奇大街时听听现场乐团，再挑一杯热饮或季节点心，当作坐下来休息的时间。([官方冬日季介绍](https://shcorporate.shanghaidisneyresort.com/wp-content/uploads/2026/11/Press-Release-Shanghai-Disney-Resort-Invites-Guests-into-a-World-of-Fairytale-Enchantment-at-Disney-Winter-Frostival.pdf))
+
+#### 可以加进当天节奏的小安排
+
+1. **茶杯后**：城堡内走“漫游童话时光”，有余裕再逛爱丽丝迷宫。
+2. **宝藏湾**：看杰克船长特技演出，之后探索海盗船；不必为此专程折返。
+3. **下午**：挑一场室内剧场演出，或安排一次角色合影，当作休息段。
+4. **傍晚到闭园**：优先看冬日巡游、米奇大街飘雪或城堡夜间演出，按当天 App 选一到两项。
+
+如果只加三项，我建议选**一场室内演出 + 一次角色互动 + 一个冬日季夜间项目**。船奇戏水滩属于戏水互动区，11 月天气偏冷，这次不作为优先项。
+
 ### 排队取舍口诀
 
 - **必玩 + 队伍可接受：排。**
